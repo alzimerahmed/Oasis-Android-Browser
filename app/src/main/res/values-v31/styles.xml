@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="ThemeOverlay.OasisBrowser.Accent.System_Light" parent="ThemeOverlay.OasisBrowser.Accent.Base.Light">
+        <item name="colorAccent">@android:color/system_accent1_600</item>
+        <item name="colorPrimaryContainer">@android:color/system_accent1_100</item>
+        <item name="colorSecondary">@android:color/system_accent2_600</item>
+        <item name="colorSecondaryContainer">@android:color/system_accent2_100</item>
+        <item name="colorTertiary">@android:color/system_accent3_600</item>
+        <item name="colorTertiaryContainer">@android:color/system_accent3_100</item>
+        <item name="colorOnPrimary">@android:color/system_accent1_0</item>
+        <item name="colorOnSecondary">@android:color/system_accent2_0</item>
+        <item name="colorOnTertiary">@android:color/system_accent3_0</item>
+
+        <!-- Full Material You surface palette from system neutrals -->
+        <item name="colorSurface">@android:color/system_neutral1_10</item>
+        <item name="colorOnSurface">@android:color/system_neutral1_900</item>
+        <item name="colorSurfaceDim">@android:color/system_neutral1_50</item>
+        <item name="colorSurfaceBright">@android:color/system_neutral1_0</item>
+        <item name="colorSurfaceContainerLow">@android:color/system_neutral1_10</item>
+        <item name="colorSurfaceContainer">@android:color/system_neutral1_100</item>
+        <item name="colorSurfaceContainerHigh">@android:color/system_neutral1_200</item>
+        <item name="colorSurfaceContainerHighest">@android:color/system_neutral1_300</item>
+        <item name="colorSurfaceVariant">@android:color/system_neutral2_100</item>
+        <item name="colorOnSurfaceVariant">@android:color/system_neutral2_700</item>
+        <item name="colorOutline">@android:color/system_neutral2_500</item>
+        <item name="colorOutlineVariant">@android:color/system_neutral2_200</item>
+        <item name="android:colorBackground">@android:color/system_neutral1_10</item>
+        <item name="colorPrimary">@android:color/system_accent1_600</item>
+    </style>
+    <style name="ThemeOverlay.OasisBrowser.Accent.System_Dark" parent="ThemeOverlay.OasisBrowser.Accent.Base.Dark">
+        <item name="colorAccent">@android:color/system_accent1_200</item>
+        <item name="colorPrimaryContainer">@android:color/system_accent1_800</item>
+        <item name="colorSecondary">@android:color/system_accent2_200</item>
+        <item name="colorSecondaryContainer">@android:color/system_accent2_800</item>
+        <item name="colorTertiary">@android:color/system_accent3_200</item>
+        <item name="colorTertiaryContainer">@android:color/system_accent3_800</item>
+        <item name="colorOnPrimary">@android:color/system_accent1_1000</item>
+        <item name="colorOnSecondary">@android:color/system_accent2_1000</item>
+        <item name="colorOnTertiary">@android:color/system_accent3_1000</item>
+
+        <!-- Full Material You surface palette for dark mode -->
+        <item name="colorSurface">@android:color/system_neutral1_900</item>
+        <item name="colorOnSurface">@android:color/system_neutral1_100</item>
+        <item name="colorSurfaceDim">@android:color/system_neutral1_900</item>
+        <item name="colorSurfaceBright">@android:color/system_neutral1_800</item>
+        <item name="colorSurfaceContainerLow">@android:color/system_neutral1_900</item>
+        <item name="colorSurfaceContainer">@android:color/system_neutral1_800</item>
+        <item name="colorSurfaceContainerHigh">@android:color/system_neutral1_700</item>
+        <item name="colorSurfaceContainerHighest">@android:color/system_neutral1_600</item>
+        <item name="colorSurfaceVariant">@android:color/system_neutral2_700</item>
+        <item name="colorOnSurfaceVariant">@android:color/system_neutral2_200</item>
+        <item name="colorOutline">@android:color/system_neutral2_400</item>
+        <item name="colorOutlineVariant">@android:color/system_neutral2_800</item>
+        <item name="android:colorBackground">@android:color/system_neutral1_900</item>
+        <item name="colorPrimary">@android:color/system_accent1_200</item>
+    </style>
+    <style name="ThemeOverlay.OasisBrowser.Accent.System_Black" parent="ThemeOverlay.OasisBrowser.Accent.System_Dark" />
+</resources>

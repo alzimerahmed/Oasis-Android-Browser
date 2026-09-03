@@ -1,0 +1,44 @@
+/*
+ * Copyright 2014 A.C.R. Development
+ */
+package com.alzimerahmed.oasisbrowser.settings.fragment
+
+import com.alzimerahmed.oasisbrowser.BuildConfig
+import com.alzimerahmed.oasisbrowser.R
+import android.os.Bundle
+import com.alzimerahmed.oasisbrowser.browser.di.injector
+import com.alzimerahmed.oasisbrowser.preference.UserPreferences
+import javax.inject.Inject
+
+class AboutSettingsFragment : AbstractSettingsFragment() {
+
+    @Inject lateinit var userPreferences: UserPreferences
+
+    override fun providePreferencesXmlResource() = R.xml.preference_about
+
+    override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
+        super.onCreatePreferences(savedInstanceState, rootKey)
+        injector.inject(this)
+        clickablePreference(
+            preference = SETTINGS_VERSION,
+            summary = BuildConfig.VERSION_NAME,
+            onClick = { }
+        )
+        togglePreference(
+            preference = RELEASE_NOTES_ENABLED,
+            isChecked = userPreferences.releaseNotesEnabled,
+            onCheckChange = { userPreferences.releaseNotesEnabled = it }
+        )
+        togglePreference(
+            preference = UPDATE_NOTIFICATIONS_ENABLED,
+            isChecked = userPreferences.updateNotificationsEnabled,
+            onCheckChange = { userPreferences.updateNotificationsEnabled = it }
+        )
+    }
+
+    companion object {
+        private const val SETTINGS_VERSION = "pref_version"
+        private const val RELEASE_NOTES_ENABLED = "release_notes_enabled"
+        private const val UPDATE_NOTIFICATIONS_ENABLED = "update_notifications_enabled"
+    }
+}

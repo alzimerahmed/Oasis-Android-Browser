@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="utf-8"?><!-- Copyright 2014 A.C.R. Development -->
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:installLocation="auto">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="com.android.launcher.permission.INSTALL_SHORTCUT" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" android:maxSdkVersion="32" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" android:maxSdkVersion="29" />
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.camera.autofocus"
+        android:required="false" />
+
+    <uses-feature
+        android:name="android.hardware.location.gps"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.location"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.touchscreen"
+        android:required="false" />
+
+    <queries>
+        <package android:name="com.alzimerahmed.oasisbrowser.antares" />
+        <intent>
+            <action android:name="android.intent.action.VIEW" />
+            <data android:scheme="http" />
+        </intent>
+        <intent>
+            <action android:name="android.intent.action.VIEW" />
+            <data android:scheme="https" />
+        </intent>
+    </queries>
+
+    <application
+    android:name=".BrowserApp"
+    android:dataExtractionRules="@xml/data_extraction_rules"
+    android:fullBackupContent="@xml/backup_rules"
+    android:hardwareAccelerated="true"
+    android:icon="@mipmap/ic_launcher"
+    android:label="@string/app_name"
+    android:localeConfig="@xml/locales_config"
+    tools:targetApi="tiramisu"
+    android:roundIcon="@mipmap/ic_launcher"
+    android:resizeableActivity="true"
+    android:supportsRtl="true"
+    android:taskAffinity="com.alzimerahmed.oasisbrowser.AffinityDefault"
+    android:usesCleartextTraffic="true"
+    android:enableOnBackInvokedCallback="true"
+        android:requestLegacyExternalStorage="true">
+        <service
+            android:name="androidx.appcompat.app.AppLocalesMetadataHolderService"
+            android:enabled="false"
+            android:exported="false">
+            <meta-data
+                android:name="autoStoreLocales"
+                android:value="true" />
+        </service>
+        <meta-data
+            android:name="android.webkit.WebView.MetricsOptOut"
+            android:value="true" />
+        <activity
+            android:name=".browser.engine.BrowserCoreChooserActivity"
+            android:exported="true"
+            android:theme="@style/Theme.LightTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.APP_BROWSER" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:mimeType="text/html" />
+                <data android:mimeType="text/plain" />
+                <data android:mimeType="application/xhtml+xml" />
+                <data android:mimeType="application/vnd.wap.xhtml+xml" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="http" />
+                <data android:scheme="https" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="http" />
+                <data android:scheme="https" />
+                <data android:mimeType="application/x-webarchive-xml" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.WEB_SEARCH" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="info.guardianproject.panic.action.TRIGGER" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.alzimerahmed.oasisbrowser.DefaultBrowserActivity"
+            android:alwaysRetainTaskState="true"
+            android:clearTaskOnLaunch="false"
+            android:colorMode="wideColorGamut"
+            android:configChanges="orientation|screenSize|screenLayout|smallestScreenSize|keyboardHidden|keyboard"
+            android:exported="false"
+            android:launchMode="singleInstance"
+            android:theme="@style/Theme.LightTheme"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
+        <activity
+            android:name="com.alzimerahmed.oasisbrowser.IncognitoBrowserActivity"
+            android:alwaysRetainTaskState="true"
+            android:clearTaskOnLaunch="false"
+            android:colorMode="wideColorGamut"
+            android:configChanges="orientation|screenSize|screenLayout|smallestScreenSize|keyboardHidden|keyboard"
+            android:exported="true"
+            android:launchMode="singleInstance"
+            android:parentActivityName="com.alzimerahmed.oasisbrowser.DefaultBrowserActivity"
+            android:process=":incognito"
+            android:taskAffinity="com.alzimerahmed.oasisbrowser.AffinityIncognito"
+            android:theme="@style/Theme.DarkTheme"
+            android:windowSoftInputMode="stateHidden|adjustResize">
+
+            <intent-filter>
+                <action android:name="android.intent.action.INCOGNITO" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".settings.activity.SettingsActivity"
+            android:colorMode="wideColorGamut"
+            android:configChanges="orientation|screenSize|screenLayout|smallestScreenSize|keyboardHidden|keyboard"
+            android:exported="false"
+            android:label="@string/settings"
+            android:parentActivityName="com.alzimerahmed.oasisbrowser.DefaultBrowserActivity"
+            android:theme="@style/Theme.SettingsTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.SETTINGS" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".settings.activity.UserScriptEditorActivity"
+            android:colorMode="wideColorGamut"
+            android:configChanges="orientation|screenSize|screenLayout|smallestScreenSize|keyboardHidden|keyboard"
+            android:exported="false"
+            android:label="@string/userscripts"
+            android:parentActivityName=".settings.activity.SettingsActivity"
+            android:theme="@style/Theme.SettingsTheme"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".qr.QrScannerActivity"
+            android:colorMode="wideColorGamut"
+            android:configChanges="orientation|screenSize|screenLayout|smallestScreenSize|keyboardHidden|keyboard"
+            android:exported="false"
+            android:label="@string/qr_scanner_title"
+            android:theme="@style/Theme.LightTheme"
+            android:windowSoftInputMode="stateHidden" />
+
+        <activity
+            android:name=".qr.QrShowActivity"
+            android:colorMode="wideColorGamut"
+            android:configChanges="orientation|screenSize|screenLayout|smallestScreenSize|keyboardHidden|keyboard"
+            android:exported="false"
+            android:label="@string/action_share"
+            android:theme="@style/Theme.LightTheme" />
+
+        <activity
+            android:name=".vault.VaultActivity"
+            android:exported="false"
+            android:label="@string/action_vault" />
+
+        <activity
+            android:name=".screenshot.ScreenshotStudioActivity"
+            android:exported="false"
+            android:label="@string/screenshot_studio_title" />
+
+        <activity
+            android:name=".browser.ui.RailMenuStudioActivity"
+            android:colorMode="wideColorGamut"
+            android:configChanges="orientation|screenSize|screenLayout|smallestScreenSize|keyboardHidden|keyboard"
+            android:exported="false"
+            android:label="@string/settings_rail_menu_studio"
+            android:parentActivityName=".settings.activity.SettingsActivity"
+            android:windowSoftInputMode="adjustResize" />
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/filepaths" />
+        </provider>
+    </application>
+
+</manifest>

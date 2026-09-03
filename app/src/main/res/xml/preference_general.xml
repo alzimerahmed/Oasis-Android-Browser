@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory android:title="@string/settings_general">
+        <Preference
+            android:icon="@drawable/ic_settings_text"
+            android:key="app_language"
+            android:title="@string/settings_language"
+            android:summary="@string/settings_language_summary" />
+        <Preference
+            android:icon="@drawable/ic_settings_download"
+            android:key="custom_language_xml"
+            android:title="@string/settings_custom_language"
+            android:summary="@string/settings_custom_language_summary" />
+        <SwitchPreferenceCompat
+            android:defaultValue="false"
+            android:icon="@drawable/ic_action_desktop"
+            android:key="cb_images"
+            android:title="@string/block"/>
+        <SwitchPreferenceCompat
+            android:defaultValue="false"
+            android:icon="@drawable/ic_settings_download"
+            android:key="savedata"
+            android:title="@string/save_data" />
+        <SwitchPreferenceCompat
+            android:defaultValue="true"
+            android:icon="@drawable/ic_settings_globe"
+            android:key="cb_javascript"
+            android:title="@string/java"/>
+        <SwitchPreferenceCompat
+            android:defaultValue="true"
+            android:icon="@drawable/ic_action_invert"
+            android:key="cb_colormode"
+            android:title="@string/color_mode"/>
+        <Preference
+            android:icon="@drawable/ic_settings_globe"
+            android:key="proxy"
+            android:title="@string/http_proxy"/>
+        <Preference
+            android:icon="@drawable/ic_settings_text"
+            android:key="agent"
+            android:title="@string/display_as"/>
+        <Preference
+            android:icon="@drawable/ic_action_forward"
+            android:key="rail_position"
+            android:title="@string/settings_rail_position"
+            android:summary="@string/settings_rail_position_summary" />
+        <SwitchPreferenceCompat
+            android:defaultValue="true"
+            android:icon="@drawable/ic_settings_globe"
+            android:key="chrompatibility_mode"
+            android:summary="@string/chrompatibility_mode_summary"
+            android:title="@string/chrompatibility_mode" />
+        <Preference
+            android:icon="@drawable/ic_settings_download"
+            android:key="download"
+            android:title="@string/download"/>
+        <SwitchPreferenceCompat
+            android:defaultValue="false"
+            android:icon="@drawable/ic_settings_download"
+            android:key="custom_download_manager_enabled"
+            android:title="@string/custom_download_manager_enabled"
+            android:summary="@string/custom_download_manager_enabled_summary" />
+        <Preference
+            android:icon="@drawable/ic_settings_download"
+            android:key="custom_download_manager"
+            android:title="@string/custom_download_manager" />
+        <SwitchPreferenceCompat
+            android:defaultValue="true"
+            android:icon="@drawable/ic_settings_download"
+            android:key="save_images_as_jpeg"
+            android:title="@string/save_images_as_jpeg"
+            android:summary="@string/save_images_as_jpeg_summary" />
+        <Preference
+            android:icon="@drawable/ic_action_home"
+            android:key="home"
+            android:title="@string/home"/>
+        <Preference
+            android:icon="@drawable/ic_settings_globe"
+            android:key="search"
+            android:title="@string/search"/>
+        <Preference
+            android:icon="@drawable/ic_settings_help"
+            android:key="suggestions_choice"
+            android:title="@string/search_suggestions"/>
+    </PreferenceCategory>
+</PreferenceScreen>

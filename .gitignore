@@ -1,0 +1,76 @@
+# Android Studio
+*.jks
+*.keystore
+*.p12
+*.pfx
+*.pem
+*.key
+.env
+!.env.example
+.DS_Store
+/local.properties
+/.idea/workspace.xml
+/build
+
+# External tool builders
+.externalToolBuilders/
+
+# CDT-specific
+.cproject
+
+# PDT-specific
+.buildpath
+
+# Windows image file caches
+Thumbs.db
+ehthumbs.db
+
+# Local configuration file (sdk path, etc)
+local.properties
+.directory
+
+# Intellij project files
+*.ipr
+*.iws
+.idea/
+
+# Gradle
+build
+.gradle
+.kotlin
+
+# https://gist.github.com/AltNico/c581f370b3f88715876b
+*.apk
+*.ap_
+*.dex
+*.class
+build.xml
+.DS_Store
+gen/
+.gradle/
+proguard/
+out
+.settings/
+*.swp
+*~
+
+# Source:
+# https://raw.githubusercontent.com/github/gitignore/master/Android.gitignore
+# https://gitlab.com/fdroid/fdroidclient/raw/master/.gitignore
+
+*.iml
+
+# Local diagnostics
+hs_err_pid*.log
+replay_pid*.log
+/artifacts/
+/website/public/release-manifest.json
+
+# Local session notes and tooling
+/.devin/
+/.switchboard/
+agent.md
+project.md
+idea.md
+progress.txt
+oasis-browser-implementation-plan-*.md

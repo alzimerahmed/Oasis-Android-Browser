@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Motion duration tokens (ms) -->
+    <integer name="motion_duration_instant">0</integer>
+    <integer name="motion_duration_quick">100</integer>
+    <integer name="motion_duration_standard">200</integer>
+    <integer name="motion_duration_emphasized">350</integer>
+    <integer name="motion_duration_long">500</integer>
+
+    <!-- Legacy alias for existing usage -->
+    <integer name="animation_time_medium">@integer/motion_duration_emphasized</integer>
+</resources>

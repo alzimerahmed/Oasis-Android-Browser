@@ -1,0 +1,77 @@
+package com.alzimerahmed.oasisbrowser.adblock.allowlist
+
+import com.alzimerahmed.oasisbrowser.database.allowlist.AdBlockAllowListRepository
+import com.alzimerahmed.oasisbrowser.database.allowlist.AllowListEntry
+import com.alzimerahmed.oasisbrowser.browser.di.DatabaseScheduler
+import com.alzimerahmed.oasisbrowser.log.Logger
+import androidx.core.net.toUri
+import io.reactivex.rxjava3.core.Completable
+import io.reactivex.rxjava3.core.Scheduler
+import io.reactivex.rxjava3.disposables.CompositeDisposable
+import javax.inject.Inject
+import javax.inject.Singleton
+
+/**
+ * An in memory representation of the ad blocking whitelist. Can be queried synchronously.
+ */
+@Singleton
+class SessionAllowListModel @Inject constructor(
+    private val adBlockAllowListModel: AdBlockAllowListRepository,
+    @DatabaseScheduler private val ioScheduler: Scheduler,
+    private val logger: Logger
+) : AllowListModel {
+
+    private var whitelistSet = hashSetOf<String>()
+    private val disposables = CompositeDisposable()
+
+    init {
+        adBlockAllowListModel
+            .allAllowListItems()
+            .map { it.map(AllowListEntry::domain).toHashSet() }
+            .subscribeOn(ioScheduler)
+            .subscribe { hashSet -> whitelistSet = hashSet }
+            .also(disposables::add)
+    }
+
+    override fun isUrlAllowedAds(url: String): Boolean =
+        url.toUri().host?.let(whitelistSet::contains) ?: false
+
+    override fun addUrlToAllowList(url: String) {
+        url.toUri().host?.let { host ->
+            adBlockAllowListModel
+                .allowListItemForUrl(host)
+                .isEmpty
+                .flatMapCompletable {
+                    if (it) {
+                        adBlockAllowListModel.addAllowListItem(
+                            AllowListEntry(host, System.currentTimeMillis())
+                        )
+                    } else {
+                        Completable.complete()
+                    }
+                }
+                .subscribeOn(ioScheduler)
+                .subscribe { logger.log(TAG, "whitelist item added to database") }
+                .also(disposables::add)
+
+            whitelistSet.add(host)
+        }
+    }
+
+    override fun removeUrlFromAllowList(url: String) {
+        url.toUri().host?.let { host ->
+            adBlockAllowListModel
+                .allowListItemForUrl(host)
+                .flatMapCompletable(adBlockAllowListModel::removeAllowListItem)
+                .subscribeOn(ioScheduler)
+                .subscribe { logger.log(TAG, "whitelist item removed from database") }
+                .also(disposables::add)
+
+            whitelistSet.remove(host)
+        }
+    }
+
+    companion object {
+        private const val TAG = "SessionAllowListModel"
+    }
+}

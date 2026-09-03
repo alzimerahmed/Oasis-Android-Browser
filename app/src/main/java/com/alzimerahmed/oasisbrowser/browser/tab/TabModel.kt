@@ -1,0 +1,326 @@
+package com.alzimerahmed.oasisbrowser.browser.tab
+
+import com.alzimerahmed.oasisbrowser.browser.download.PendingDownload
+import com.alzimerahmed.oasisbrowser.ssl.SslCertificateInfo
+import com.alzimerahmed.oasisbrowser.ssl.SslState
+import com.alzimerahmed.oasisbrowser.utils.Option
+import android.content.Intent
+import android.graphics.Bitmap
+import android.os.Bundle
+import android.view.View
+import androidx.activity.result.ActivityResult
+import androidx.annotation.ColorInt
+import io.reactivex.rxjava3.core.Observable
+
+/**
+ * The result state of an in-page find operation.
+ *
+ * @property activeMatch The 1-based index of the currently highlighted match.
+ * @property totalMatches The total number of matches, or 0 if unknown/not found.
+ */
+data class FindResult(val activeMatch: Int, val totalMatches: Int)
+
+/**
+ * The representation of a browser tab.
+ */
+interface TabModel {
+
+    /** The kind of content currently presented by this tab. */
+    val contentKind: TabContentKind
+
+    /** Emits whenever this tab moves between the native homepage and its browser engine. */
+    fun contentKindChanges(): Observable<TabContentKind>
+
+    /**
+     * The tab identifier.
+     */
+    val id: Int
+
+    /**
+     * The type of tab this is, defined by its origin.
+     */
+    var tabType: Type
+
+    // Navigation
+
+    /**
+     * Load a [url] in the tab.
+     */
+    fun loadUrl(url: String)
+
+    /**
+     * Load a URL using the provided [tabInitializer].
+     */
+    fun loadFromInitializer(tabInitializer: TabInitializer)
+
+    /**
+     * Go back in the navigation tree.
+     */
+    fun goBack()
+
+    /**
+     * True if [goBack] has something to go back to, false otherwise.
+     */
+    fun canGoBack(): Boolean
+
+    /**
+     * Emits changes to the [canGoBack] status.
+     */
+    fun canGoBackChanges(): Observable<Boolean>
+
+    /**
+     * Go forward in the navigation tree.
+     */
+    fun goForward()
+
+    /**
+     * True if [goForward] has something to go forward to, false otherwise.
+     */
+    fun canGoForward(): Boolean
+
+    /**
+     * Emits changes to the [canGoForward] status.
+     */
+    fun canGoForwardChanges(): Observable<Boolean>
+
+    /**
+     * Toggle the user agent used by the browser to a desktop one or back to the default one.
+     */
+    fun toggleDesktopAgent()
+
+    /** Apply the currently selected global user-agent preference to this tab. */
+    fun applyUserAgentPreference()
+
+    /** Apply the current global ad and GIF blocking policy to this tab's engine. */
+    fun applyContentBlockingPreferences()
+
+    /** Apply the current app theme as the page's preferred CSS colour scheme. */
+    fun applyThemePreference()
+
+    /**
+     * Reload the page the browser is currently showing.
+     */
+    fun reload()
+
+    /**
+     * Reload the current page once with JavaScript disabled, then restore the previous state.
+     */
+    fun reloadWithJavaScriptDisabled()
+
+    /** Capture the visible webpage viewport, excluding browser chrome and rails. */
+    fun captureVisiblePage(): Bitmap?
+
+    fun pickElement()
+
+    /**
+     * Stop loading the current page if it is loading. If the page is not loading, has no effect.
+     */
+    fun stopLoading()
+
+    /**
+     * Highlight words in the webpage that match the [query].
+     */
+    fun find(query: String)
+
+    /**
+     * Move to the next word highlighted by [find].
+     */
+    fun findNext()
+
+    /**
+     * Move to the previous word highlighted by [find].
+     */
+    fun findPrevious()
+
+    /**
+     * Remove highlighting from all words highlighted by [find].
+     */
+    fun clearFindMatches()
+
+    /**
+     * Emits updates to the find-in-page result count.
+     */
+    fun findResults(): Observable<FindResult>
+
+    /** Extract readable body text without changing the page. */
+    fun readPageText(onText: (String) -> Unit)
+
+    /** Extract the current page HTML snapshot without changing the page. */
+    fun extractHtmlSnapshot(onHtml: (String) -> Unit)
+
+    /**
+     * The current query that is being highlighted by [find].
+     */
+    val findQuery: String?
+
+    // Data
+
+    /**
+     * The current favicon of the webpage or null if there isn't one.
+     */
+    val favicon: Bitmap?
+
+    /**
+     * Emits changes to the [favicon].
+     */
+    fun faviconChanges(): Observable<Option<Bitmap>>
+
+    /**
+     * A preview of the tab's content.
+     */
+    val preview: Pair<String?, Long>
+
+    /**
+     * Emits changes to the [preview].
+     */
+    fun previewChanges(): Observable<Pair<String?, Long>>
+
+    /**
+     * The thematic color of the current webpage.
+     */
+    @get:ColorInt
+    val themeColor: Int
+
+    /**
+     * Emits changes to the [themeColor].
+     */
+    fun themeColorChanges(): Observable<Int>
+
+    /**
+     * The URL of the currently displayed webpage.
+     */
+    val url: String
+
+    /**
+     * Emits changes to the [url].
+     */
+    fun urlChanges(): Observable<String>
+
+    /**
+     * The title of the current webpage.
+     */
+    val title: String
+
+    /**
+     * Emits changes to the [title].
+     */
+    fun titleChanges(): Observable<String>
+
+    /**
+     * The current SSL certificate information about the webpage.
+     */
+    val sslCertificateInfo: SslCertificateInfo?
+
+    /**
+     * The current state of the SSL certificate.
+     */
+    val sslState: SslState
+
+    /**
+     * Emits changes to [sslState].
+     */
+    fun sslChanges(): Observable<SslState>
+
+    /**
+     * The loading progress for the current webpage on a scale of 0-100. If the page is completely
+     * loaded, then the progress will be 100.
+     */
+    val loadingProgress: Int
+
+    /**
+     * Emits changes to [sslState].
+     */
+    fun loadingProgress(): Observable<Int>
+
+    // Lifecycle
+
+    /**
+     * Emits requests to download a file represented by [PendingDownload] that are triggered by the
+     * browser.
+     */
+    fun downloadRequests(): Observable<PendingDownload>
+
+    /**
+     * Emits requests to open the file chooser that are triggered by the browser.
+     */
+    fun fileChooserRequests(): Observable<Intent>
+
+    /**
+     * Handle a resulting file to upload after selecting a file from the file chooser.
+     */
+    fun handleFileChooserResult(activityResult: ActivityResult)
+
+    /**
+     * Emits requests by the browser to display a custom view (i.e. full screen video) over the
+     * regular webpage content.
+     */
+    fun showCustomViewRequests(): Observable<View>
+
+    /**
+     * Emits requests by the browser to hide the custom view it previously requested to display via
+     * [showCustomViewRequests].
+     */
+    fun hideCustomViewRequests(): Observable<Unit>
+
+    /**
+     * Notify the browser that we are manually hiding the custom view requested to be shown by
+     * [showCustomViewRequests].
+     */
+    fun hideCustomView()
+
+    /**
+     * Emits requests by the browser to automatically open a new tab and load the URL provided by
+     * the [TabInitializer].
+     */
+    fun createWindowRequests(): Observable<TabInitializer>
+
+    /**
+     * Emits requests by the browser to automatically close the current tab.
+     */
+    fun closeWindowRequests(): Observable<Unit>
+
+    /**
+     * True if the tab is in the foreground, false if it is in the background. Used to prevent
+     * background tabs from consuming disproportionate amounts of resources when they are unused.
+     */
+    var isForeground: Boolean
+
+    /**
+     * Notify an embedded engine that browser chrome is being drawn over the page. Normal WebView
+     * tabs do not need special handling; remote SurfaceControlViewHost tabs use this to keep
+     * drawers above their interactive surface.
+     */
+    fun setBrowserChromeOverlayVisible(visible: Boolean, onApplied: () -> Unit = {}) = onApplied()
+
+    /**
+     * Controls whether the browser engine is attached, foregrounded and eligible for input.
+     * This is separate from temporary browser chrome such as the address editor and drawers.
+     */
+    fun setContentVisible(visible: Boolean) = Unit
+
+    /**
+     * Called after the browser activity becomes interactive again. Remote engines can use this to
+     * finish or repair a surface attachment that was deferred while Settings covered the browser.
+     */
+    fun onHostResumed() = Unit
+
+    val hasFocus: Boolean
+
+    fun hasFocusChanges(): Observable<Boolean>
+
+    /**
+     * Teardown the current tab and release held resources.
+     */
+    fun destroy()
+
+    /**
+     * Freeze the current state of the tab and return it as a [Bundle].
+     */
+    fun freeze(): Bundle
+
+    enum class Type {
+        NORMAL,
+        EPHEMERAL,
+        POP_UP
+    }
+}

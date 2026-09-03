@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory android:title="@string/settings_display">
+        <SwitchPreferenceCompat
+            android:defaultValue="false"
+            android:icon="@drawable/ic_action_expand"
+            android:key="fullScreenOption"
+            android:title="@string/fullScreenOption" />
+        <SwitchPreferenceCompat
+            android:defaultValue="true"
+            android:icon="@drawable/ic_action_desktop"
+            android:key="fullscreen"
+            android:title="@string/fullscreen" />
+        <SwitchPreferenceCompat
+            android:defaultValue="false"
+            android:icon="@drawable/ic_action_desktop"
+            android:key="hide_rail_in_fullscreen"
+            android:title="@string/hide_rail_in_fullscreen"
+            android:summary="@string/hide_rail_in_fullscreen_summary" />
+        <SwitchPreferenceCompat
+            android:defaultValue="false"
+            android:icon="@drawable/ic_action_invert"
+            android:key="black_status_bar"
+            android:title="@string/settings_black_status_bar" />
+        <SwitchPreferenceCompat
+            android:defaultValue="true"
+            android:icon="@drawable/ic_action_desktop"
+            android:key="wideViewPort"
+            android:summary="@string/recommended"
+            android:title="@string/wideViewPort" />
+        <SwitchPreferenceCompat
+            android:defaultValue="true"
+            android:icon="@drawable/ic_action_desktop"
+            android:key="overViewMode"
+            android:summary="@string/recommended"
+            android:title="@string/overViewMode" />
+        <SwitchPreferenceCompat
+            android:defaultValue="false"
+            android:icon="@drawable/ic_settings_text"
+            android:key="text_reflow"
+            android:title="@string/reflow" />
+        <Preference
+            android:icon="@drawable/ic_action_invert"
+            android:key="app_theme"
+            android:title="@string/theme" />
+        <Preference
+            android:icon="@drawable/ic_settings_text"
+            android:key="text_size"
+            android:title="@string/title_text_size" />
+        <Preference
+            android:icon="@drawable/ic_settings_text"
+            android:key="custom_font"
+            android:summary="@string/settings_custom_font_summary"
+            android:title="@string/settings_custom_font" />
+        <Preference
+            android:icon="@drawable/ic_action_desktop"
+            android:key="homepage_wallpaper"
+            android:title="@string/settings_homepage_wallpaper" />
+        <Preference
+            android:icon="@drawable/ic_action_desktop"
+            android:key="homepage_source"
+            android:title="@string/settings_homepage_source" />
+        <Preference
+            android:icon="@drawable/ic_settings_text"
+            android:key="homepage_layout"
+            android:title="@string/settings_homepage_layout" />
+        <Preference
+            android:icon="@drawable/ic_settings_text"
+            android:key="homepage_editor"
+            android:title="@string/settings_homepage_editor" />
+        <Preference
+            android:icon="@drawable/ic_action_invert"
+            android:key="accent_palette"
+            android:title="@string/settings_accent_palette" />
+        <SwitchPreferenceCompat
+            android:defaultValue="false"
+            android:icon="@drawable/ic_action_invert"
+            android:key="match_system_accent"
+            android:title="@string/settings_match_system_accent"
+            android:summary="@string/settings_match_system_accent_summary" />
+        <SwitchPreferenceCompat
+            android:defaultValue="true"
+            android:icon="@drawable/ic_history"
+            android:key="homepage_datetime_enabled"
+            android:title="@string/settings_homepage_datetime"
+            android:summary="@string/settings_homepage_datetime_summary" />
+        <Preference
+            android:icon="@drawable/ic_history"
+            android:key="homepage_time_format"
+            android:title="@string/settings_homepage_time_format" />
+        <Preference
+            android:icon="@drawable/ic_history"
+            android:key="homepage_date_format"
+            android:title="@string/settings_homepage_date_format" />
+        <Preference
+            android:icon="@drawable/ic_settings_text"
+            android:key="homepage_datetime_opacity"
+            android:title="@string/settings_homepage_datetime_opacity" />
+        <Preference
+            android:icon="@drawable/ic_action_desktop"
+            android:key="rail_size"
+            android:title="@string/settings_rail_size" />
+        <Preference
+            android:icon="@drawable/ic_action_vault"
+            android:key="rail_utility_action"
+            android:title="@string/settings_rail_utility_action"
+            android:summary="@string/settings_rail_utility_action_summary" />
+        <Preference
+            android:icon="@drawable/ic_action_more_vertical"
+            android:key="rail_menu_studio"
+            android:title="@string/settings_rail_menu_studio"
+            android:summary="@string/settings_rail_menu_studio_summary" />
+    </PreferenceCategory>
+</PreferenceScreen>

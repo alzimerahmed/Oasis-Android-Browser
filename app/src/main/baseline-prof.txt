@@ -1,0 +1,15 @@
+# Oasis Browser baseline profile
+# This file lists classes and methods that should be AOT compiled to improve cold start.
+
+Lcom/alzimerahmed/oasisbrowser/BrowserApp;->onCreate()V
+Lcom/alzimerahmed/oasisbrowser/BrowserApp;-><init>()V
+Lcom/alzimerahmed/oasisbrowser/browser/BrowserActivity;->onCreate(Landroid/os/Bundle;)V
+Lcom/alzimerahmed/oasisbrowser/browser/BrowserActivity;->onResume()V
+Lcom/alzimerahmed/oasisbrowser/browser/BrowserActivity;->onStart()V
+Lcom/alzimerahmed/oasisbrowser/ThemableBrowserActivity;->onCreate(Landroid/os/Bundle;)V
+Lcom/alzimerahmed/oasisbrowser/ThemableBrowserActivity;->onResume()V
+Lcom/alzimerahmed/oasisbrowser/AccentPalette;->overlayFor(II)I
+Lcom/alzimerahmed/oasisbrowser/AccentPalette;->overlayFor(Lcom/alzimerahmed/oasisbrowser/AppTheme;I)I
+Lcom/alzimerahmed/oasisbrowser/utils/ThemeUtils;->getStatusBarColor(Landroid/content/Context;)I
+Lcom/alzimerahmed/oasisbrowser/utils/CustomFontManager;->applyToViewTree(Landroid/view/View;Ljava/lang/String;)V
+Lcom/alzimerahmed/oasisbrowser/preference/UserPreferences;-><init>(Landroid/content/Context;)V

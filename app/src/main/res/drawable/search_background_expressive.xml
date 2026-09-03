@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_focused="true">
+        <ripple android:color="?attr/colorPrimaryContainer">
+            <item>
+                <shape android:shape="rectangle">
+                    <corners android:radius="28dp" />
+                    <solid android:color="?attr/colorSurfaceContainerHighest" />
+                </shape>
+            </item>
+        </ripple>
+    </item>
+
+    <item>
+        <ripple android:color="?attr/colorSecondaryContainer">
+            <item>
+                <shape android:shape="rectangle">
+                    <corners android:radius="28dp" />
+                    <solid android:color="?attr/colorSurfaceContainerHigh" />
+                </shape>
+            </item>
+        </ripple>
+    </item>
+</selector>

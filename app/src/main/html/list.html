@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html xmlns=http://www.w3.org/1999/xhtml>
+
+<head>
+    <meta content=en-us http-equiv=Content-Language/>
+    <meta content='text/html; charset=utf-8' http-equiv=Content-Type/>
+    <meta name=viewport content='width=device-width, initial-scale=1'>
+    <title>
+
+    </title>
+</head>
+<style>
+    :root {
+        --body-bg: {COLOR};
+        --divider-color: {COLOR};
+        --title-color: {COLOR};
+        --subtitle-color: {COLOR};
+        --surface: var(--divider-color);
+        --accent: var(--divider-color);
+    }
+
+    body,
+    html {
+        margin: 0px;
+        padding: 0px;
+        background-color: var(--body-bg);
+        color: var(--title-color);
+        font-family: sans-serif;
+        -webkit-font-smoothing: antialiased;
+    }
+    
+    .box {
+        position: relative;
+        display: grid;
+        grid-template-columns: 44px minmax(0, 1fr);
+        align-items: center;
+        gap: 14px;
+        min-height: 78px;
+        margin: 0 12px 5px;
+        padding: 10px 12px;
+        border: 0;
+        border-radius: 30px;
+        color: var(--title-color);
+        font-size: 1rem;
+        transition: background-color .2s ease, transform .2s ease;
+        -webkit-tap-highlight-color: transparent;
+    }
+
+    .box:active { background: var(--surface); transform: scale(.985); }
+
+    @media (prefers-reduced-motion: reduce) {
+        *, *::before, *::after {
+            animation-duration: 0.01ms !important;
+            transition-duration: 0.01ms !important;
+            scroll-behavior: auto !important;
+        }
+    }
+    
+    .box a {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        left: 0;
+        top: 0;
+    }
+    
+    .black {
+        color: var(--title-color);
+        font-size: 1.125rem;
+        font-family: sans-serif;
+        font-weight: 600;
+        white-space: nowrap;
+        overflow: hidden;
+        margin: auto;
+        text-overflow: ellipsis;
+        -o-text-overflow: ellipsis;
+        -ms-text-overflow: ellipsis;
+    }
+    
+    .font {
+        color: var(--subtitle-color);
+        font-size: 0.875rem;
+        font-family: sans-serif;
+        white-space: nowrap;
+        overflow: hidden;
+        margin: auto;
+        text-overflow: ellipsis;
+        -o-text-overflow: ellipsis;
+        -ms-text-overflow: ellipsis;
+    }
+
+    .page_actions {
+        display: none;
+        padding: 24px 18px 18px;
+        font-family: sans-serif;
+    }
+
+    .page_actions.visible {
+        display: block;
+    }
+
+    .page_header {
+        display: flex;
+        min-height: 86px;
+        align-items: center;
+        gap: 16px;
+        margin-bottom: 12px;
+        padding: 14px 18px;
+        border-radius: 32px;
+        background: var(--surface);
+    }
+
+    .page_header h1 {
+        margin: 0;
+        color: var(--title-color);
+        font-size: 30px;
+        font-weight: 650;
+        letter-spacing: -0.04em;
+    }
+
+    .page_icon {
+        display: grid;
+        width: 54px;
+        height: 54px;
+        place-items: center;
+        border-radius: 50%;
+        background: var(--accent);
+        color: var(--title-color);
+        font-size: 28px;
+    }
+
+    .item_icon {
+        display: grid;
+        width: 42px;
+        height: 42px;
+        place-items: center;
+        border-radius: 50%;
+        background: var(--accent);
+        color: var(--title-color);
+        font-size: 20px;
+        font-weight: 700;
+    }
+
+    .history_clear_button {
+        display: inline-flex;
+        min-height: 50px;
+        align-items: center;
+        justify-content: center;
+        padding: 0 22px;
+        border: 0;
+        border-radius: 26px;
+        background: var(--surface);
+        color: var(--title-color);
+        font-size: 15px;
+        font-weight: 700;
+        font-family: sans-serif;
+        text-decoration: none;
+        -webkit-user-select: none;
+        user-select: none;
+        -webkit-touch-callout: none;
+    }
+</style>
+
+<body>
+<!--ACTION_BAR-->
+<div id="content">
+
+    <div id=repeated class=box>
+        <div class="item_icon" aria-hidden="true">•</div>
+        <a href='${URL}'></a>
+        <p id='title' class='black'>${TITLE}</p>
+        <p id='url' class='font'>${URL}</p>
+    </div>
+
+</div>
+</body>
+
+</html>

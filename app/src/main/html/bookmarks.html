@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html xmlns=http://www.w3.org/1999/xhtml>
+
+<head>
+    <meta content=en-us http-equiv=Content-Language>
+    <meta content='text/html; charset=utf-8' http-equiv=Content-Type>
+    <meta name=viewport content='width=device-width, initial-scale=1'>
+    <title>
+        ${TITLE}
+    </title>
+</head>
+<style>
+    :root {
+        --body-bg: {COLOR}
+        --box-bg: {COLOR}
+        --box-txt: {COLOR}
+    }
+
+    body {
+        background: var(--body-bg);
+        padding-top: 5px;
+        max-width: 100%;
+        min-height: 100%
+    }
+
+    #content {
+        width: 100%;
+        max-width: 800px;
+        margin: 0 auto;
+        text-align: center
+    }
+
+    .page_header {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        min-height: 72px;
+        margin: 8px 24px 14px;
+        padding: 12px 18px;
+        border-radius: 28px;
+        background: var(--box-bg);
+        color: var(--box-txt);
+        text-align: left;
+    }
+
+    .page_header h1 {
+        margin: 0;
+        color: var(--box-txt);
+        font-size: 30px;
+        font-weight: 650;
+        letter-spacing: -0.04em;
+    }
+
+    .page_icon {
+        display: grid;
+        width: 48px;
+        height: 48px;
+        flex: 0 0 48px;
+        place-items: center;
+        border-radius: 50%;
+        background: var(--body-bg);
+        color: var(--box-txt);
+        font-size: 26px;
+    }
+
+    .box {
+        vertical-align: middle;
+        text-align: center;
+        position: relative;
+        display: inline-block;
+        height: 45px;
+        width: 145px;
+        margin: 6px;
+        padding: 4px;
+        background-color: var(--box-bg);
+        font-family: Arial;
+        color: var(--box-txt);
+        font-size: 1rem;
+        -moz-border-radius: 8px;
+        -webkit-border-radius: 8px;
+        border-radius: 8px
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        *, *::before, *::after {
+            animation-duration: 0.01ms !important;
+            transition-duration: 0.01ms !important;
+            scroll-behavior: auto !important;
+        }
+    }
+    
+    .box-content {
+        height: 25px;
+        width: 100%;
+        vertical-align: middle;
+        text-align: center;
+        display: table-cell
+    }
+    
+    p.ellipses {
+        width: 130px;
+        font-size: 0.875rem;
+        font-family: Arial, Helvetica, 'sans-serif';
+        white-space: nowrap;
+        overflow: hidden;
+        text-align: left;
+        vertical-align: middle;
+        margin: auto;
+        text-overflow: ellipsis;
+        -o-text-overflow: ellipsis;
+        -ms-text-overflow: ellipsis
+    }
+    
+    .box a {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        left: 0;
+        top: 0
+    }
+    
+    img {
+        vertical-align: middle;
+        margin-right: 10px;
+        width: 20px;
+        height: 20px;
+    }
+    
+    .margin {
+        margin: 10px
+    }
+
+    #bookmark-search {
+        box-sizing: border-box;
+        display: block;
+        width: calc(100% - 24px);
+        max-width: 620px;
+        margin: 8px auto 12px;
+        padding: 10px 14px;
+        border: 1px solid var(--box-bg);
+        border-radius: 12px;
+        background: var(--box-bg);
+        color: var(--box-txt);
+        font: inherit;
+    }
+
+    #bookmark-empty {
+        display: none;
+        margin: 24px;
+        color: var(--box-txt);
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+
+</style>
+
+<body>
+<div id=content>
+
+    <header class=page_header>
+        <div class=page_icon aria-hidden=true>☆</div>
+        <h1 id=bookmark-title></h1>
+    </header>
+
+    <input id=bookmark-search type=search placeholder="Search bookmarks" aria-label="Search bookmarks" autocomplete=off />
+
+    <div id=repeated class=box>
+        <a href='${URL}'></a>
+        <div class=margin>
+            <div class=box-content>
+                <p class=ellipses id=title>
+                    <img src='${IMAGE}'/>
+                </p>
+            </div>
+        </div>
+    </div>
+
+</div>
+<p id=bookmark-empty role=status>No bookmarks match your search.</p>
+<script>
+    (function () {
+        var input = document.getElementById('bookmark-search');
+        var empty = document.getElementById('bookmark-empty');
+        var cards = Array.prototype.slice.call(document.querySelectorAll('.box'));
+        input.addEventListener('input', function () {
+            var query = input.value.trim().toLowerCase();
+            var visible = 0;
+            cards.forEach(function (card) {
+                var haystack = (card.getAttribute('data-search') || card.textContent || '').toLowerCase();
+                var show = !query || haystack.indexOf(query) !== -1;
+                card.style.display = show ? '' : 'none';
+                if (show) visible++;
+            });
+            empty.style.display = visible ? 'none' : 'block';
+        });
+    }());
+</script>
+</body>
+
+</html>

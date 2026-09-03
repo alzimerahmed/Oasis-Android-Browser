@@ -1,0 +1,536 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- Settings themes -->
+    <style name="Theme.SettingsTheme" parent="Theme.LightTheme">
+        <item name="android:windowBackground">@null</item>
+        <item name="toolbarSettingsBackground">@drawable/toolbar_expressive</item>
+    </style>
+
+    <style name="Theme.SettingsTheme.Dark" parent="Theme.DarkTheme">
+        <item name="android:windowBackground">@null</item>
+        <item name="toolbarSettingsBackground">@drawable/toolbar_expressive</item>
+
+        <!-- Dark settings has a special primary dark -->
+        <item name="colorPrimaryDark">?attr/colorSurfaceContainer</item>
+    </style>
+
+    <style name="Theme.SettingsTheme.Black" parent="Theme.BlackTheme">
+        <item name="android:windowBackground">@null</item>
+        <item name="toolbarSettingsBackground">@drawable/toolbar_expressive</item>
+    </style>
+
+    <!-- Regular themes -->
+    <style name="Theme.LightTheme" parent="Theme.BaseLightTheme">
+        <item name="searchBackground">@drawable/search_background_expressive</item>
+        <item name="listBackground">@drawable/list_bg</item>
+        <item name="progressBackgroundColor">@color/md3_primary_container</item>
+        <item name="sheetBackground">@color/md3_surface_container</item>
+        <item name="sheetHeaderBackground">@color/md3_surface_container_high</item>
+        <item name="sheetFooterBackground">@color/md3_surface_container_high</item>
+        <item name="sheetHandleColor">@color/md3_outline</item>
+    </style>
+
+    <style name="Theme.DarkTheme" parent="Theme.BaseDarkTheme">
+        <item name="searchBackground">@drawable/search_background_expressive</item>
+        <item name="listBackground">@drawable/list_bg</item>
+        <item name="progressBackgroundColor">@color/md3_dark_primary_container</item>
+        <item name="sheetBackground">@color/md3_dark_surface_container</item>
+        <item name="sheetHeaderBackground">@color/md3_dark_surface_container_high</item>
+        <item name="sheetFooterBackground">@color/md3_dark_surface_container_high</item>
+        <item name="sheetHandleColor">@color/md3_dark_outline</item>
+    </style>
+
+    <style name="Theme.BlackTheme" parent="Theme.BaseBlackTheme">
+        <item name="searchBackground">@drawable/search_background_expressive</item>
+        <item name="listBackground">@drawable/list_bg</item>
+        <item name="progressBackgroundColor">@color/black</item>
+        <item name="sheetBackground">@color/md3_black_surface_container</item>
+        <item name="sheetHeaderBackground">@color/md3_black_surface_container_high</item>
+        <item name="sheetFooterBackground">@color/md3_black_surface_container_high</item>
+        <item name="sheetHandleColor">@color/md3_dark_outline</item>
+    </style>
+
+    <!-- Base Themes -->
+    <style name="Theme.BaseLightTheme" parent="Theme.Material3Expressive.Light.NoActionBar">
+
+        <!-- Theme Colors -->
+        <item name="colorPrimary">@color/md3_surface</item>
+        <item name="colorPrimaryContainer">@color/md3_primary_container</item>
+        <item name="colorPrimaryDark">@color/md3_surface_container</item>
+        <item name="colorAccent">@color/md3_primary</item>
+        <item name="colorSecondary">@color/md3_secondary</item>
+        <item name="colorSecondaryContainer">@color/md3_secondary_container</item>
+        <item name="colorTertiary">@color/md3_tertiary</item>
+        <item name="colorTertiaryContainer">@color/md3_tertiary_container</item>
+        <item name="colorSurface">@color/md3_surface</item>
+        <item name="colorSurfaceContainerLow">@color/md3_surface_container_low</item>
+        <item name="colorSurfaceContainer">@color/md3_surface_container</item>
+        <item name="colorSurfaceContainerHigh">@color/md3_surface_container_high</item>
+        <item name="colorSurfaceContainerHighest">@color/md3_surface_container_highest</item>
+        <item name="colorOnPrimary">@color/md3_on_primary</item>
+        <item name="colorOnSecondary">@color/md3_on_secondary</item>
+        <item name="colorOnTertiary">@color/md3_on_tertiary</item>
+        <item name="colorOnSurface">@color/md3_on_surface</item>
+        <item name="colorOnSurfaceVariant">@color/md3_on_surface_variant</item>
+        <item name="colorOutline">@color/md3_outline</item>
+        <item name="colorOutlineVariant">@color/md3_outline_variant</item>
+        <item name="colorError">@color/md3_error</item>
+        <item name="colorOnError">@color/md3_on_error</item>
+        <item name="colorErrorContainer">@color/md3_error_container</item>
+        <item name="colorOnErrorContainer">@color/md3_on_error_container</item>
+        <item name="colorSurfaceDim">@color/md3_surface_dim</item>
+        <item name="colorSurfaceBright">@color/md3_surface_bright</item>
+        <item name="colorSurfaceVariant">@color/md3_surface_variant</item>
+        <item name="android:colorBackground">@color/md3_surface</item>
+        <item name="android:navigationBarColor">@color/md3_surface_container</item>
+        <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">true</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="preferenceTheme">@style/PreferenceThemeOverlay.OasisBrowser</item>
+        <item name="popupMenuStyle">@style/Widget.OasisBrowser.PopupMenu</item>
+        <item name="toolbarStyle">@style/Widget.OasisBrowser.Toolbar</item>
+        <item name="toolbarSurfaceStyle">@style/Widget.OasisBrowser.Toolbar.Surface</item>
+        <item name="drawerBackground">@color/md3_surface_container</item>
+        <item name="railBackground">@color/md3_surface_container_low</item>
+        <item name="dividerColor">@color/md3_outline_variant</item>
+
+        <item name="iconColor">@color/icon_light_theme</item>
+        <item name="iconColorState">@color/state_color_icons_light</item>
+
+        <item name="autoCompleteBackgroundColor">@color/md3_surface_container_high</item>
+        <item name="autoCompleteTitleColor">@color/md3_on_surface</item>
+        <item name="autoCompleteUrlColor">@color/md3_on_surface_variant</item>
+
+        <item name="selectedBackground">@color/md3_primary_container</item>
+
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="android:windowContentOverlay">@null</item>
+
+        <!-- Overflow menu -->
+        <item name="actionOverflowButtonStyle">@style/overFlowButtonStyle</item>
+
+        <!-- Alert dialogs -->
+        <item name="alertDialogTheme">@style/MaterialDialogStyle.Light</item>
+        <item name="materialAlertDialogTheme">@style/MaterialDialogStyle.Light</item>
+
+    </style>
+
+    <style name="Theme.BaseDarkTheme" parent="Theme.Material3Expressive.Dark.NoActionBar">
+
+        <!-- Theme colors -->
+        <item name="colorPrimary">@color/md3_dark_surface</item>
+        <item name="colorPrimaryContainer">@color/md3_dark_primary_container</item>
+        <item name="colorPrimaryDark">@color/md3_dark_surface_container</item>
+        <item name="colorAccent">@color/md3_dark_primary</item>
+        <item name="colorSecondary">@color/md3_dark_secondary</item>
+        <item name="colorSecondaryContainer">@color/md3_dark_secondary_container</item>
+        <item name="colorTertiary">@color/md3_dark_tertiary</item>
+        <item name="colorTertiaryContainer">@color/md3_dark_tertiary_container</item>
+        <item name="colorSurface">@color/md3_dark_surface</item>
+        <item name="colorSurfaceContainerLow">@color/md3_dark_surface_container_low</item>
+        <item name="colorSurfaceContainer">@color/md3_dark_surface_container</item>
+        <item name="colorSurfaceContainerHigh">@color/md3_dark_surface_container_high</item>
+        <item name="colorSurfaceContainerHighest">@color/md3_dark_surface_container_highest</item>
+        <item name="colorOnPrimary">@color/md3_dark_on_primary</item>
+        <item name="colorOnSecondary">@color/md3_dark_on_secondary</item>
+        <item name="colorOnTertiary">@color/md3_dark_on_tertiary</item>
+        <item name="colorOnSurface">@color/md3_dark_on_surface</item>
+        <item name="colorOnSurfaceVariant">@color/md3_dark_on_surface_variant</item>
+        <item name="colorOutline">@color/md3_dark_outline</item>
+        <item name="colorOutlineVariant">@color/md3_dark_outline_variant</item>
+        <item name="colorError">@color/md3_dark_error</item>
+        <item name="colorOnError">@color/md3_dark_on_error</item>
+        <item name="colorErrorContainer">@color/md3_dark_error_container</item>
+        <item name="colorOnErrorContainer">@color/md3_dark_on_error_container</item>
+        <item name="colorSurfaceDim">@color/md3_dark_surface_dim</item>
+        <item name="colorSurfaceBright">@color/md3_dark_surface_bright</item>
+        <item name="colorSurfaceVariant">@color/md3_dark_surface_variant</item>
+        <item name="android:colorBackground">@color/md3_dark_surface</item>
+        <item name="android:navigationBarColor">@color/md3_dark_surface_container</item>
+        <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">false</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="preferenceTheme">@style/PreferenceThemeOverlay.OasisBrowser</item>
+        <item name="popupMenuStyle">@style/Widget.OasisBrowser.PopupMenu</item>
+        <item name="toolbarStyle">@style/Widget.OasisBrowser.Toolbar</item>
+        <item name="toolbarSurfaceStyle">@style/Widget.OasisBrowser.Toolbar.Surface</item>
+        <item name="drawerBackground">@color/md3_dark_surface_container</item>
+        <item name="railBackground">@color/md3_dark_surface_container_low</item>
+        <item name="dividerColor">@color/md3_dark_outline_variant</item>
+
+        <item name="iconColor">@color/icon_dark_theme</item>
+        <item name="iconColorState">@color/state_color_icons_dark</item>
+
+        <item name="autoCompleteBackgroundColor">@color/md3_dark_surface_container_high</item>
+        <item name="autoCompleteTitleColor">@color/md3_dark_on_surface</item>
+        <item name="autoCompleteUrlColor">@color/md3_dark_on_surface_variant</item>
+
+        <item name="selectedBackground">@color/md3_dark_primary_container</item>
+
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="android:windowContentOverlay">@null</item>
+
+        <!-- Overflow menu -->
+        <item name="actionOverflowButtonStyle">@style/overFlowButtonStyle</item>
+
+        <!-- Alert dialogs -->
+        <item name="alertDialogTheme">@style/MaterialDialogStyle.Dark</item>
+        <item name="materialAlertDialogTheme">@style/MaterialDialogStyle.Dark</item>
+    </style>
+
+    <style name="Theme.BaseBlackTheme" parent="Theme.Material3Expressive.Dark.NoActionBar">
+
+        <!-- Theme Colors -->
+        <item name="colorPrimary">@color/black</item>
+        <item name="colorPrimaryContainer">@color/md3_dark_primary_container</item>
+        <item name="colorPrimaryDark">@color/black</item>
+        <item name="colorAccent">@color/md3_dark_primary</item>
+        <item name="colorSecondary">@color/md3_dark_secondary</item>
+        <item name="colorSecondaryContainer">@color/md3_dark_secondary_container</item>
+        <item name="colorTertiary">@color/md3_dark_tertiary</item>
+        <item name="colorTertiaryContainer">@color/md3_dark_tertiary_container</item>
+        <item name="colorSurface">@color/black</item>
+        <item name="colorSurfaceContainerLow">@color/md3_black_surface_container_low</item>
+        <item name="colorSurfaceContainer">@color/md3_black_surface_container</item>
+        <item name="colorSurfaceContainerHigh">@color/md3_black_surface_container_high</item>
+        <item name="colorSurfaceContainerHighest">@color/md3_black_surface_container_highest</item>
+        <item name="colorOnPrimary">@color/md3_dark_on_primary</item>
+        <item name="colorOnSecondary">@color/md3_dark_on_secondary</item>
+        <item name="colorOnTertiary">@color/md3_dark_on_tertiary</item>
+        <item name="colorOnSurface">@color/md3_dark_on_surface</item>
+        <item name="colorOnSurfaceVariant">@color/md3_dark_on_surface_variant</item>
+        <item name="colorOutline">@color/md3_dark_outline</item>
+        <item name="colorOutlineVariant">@color/md3_dark_outline_variant</item>
+        <item name="colorError">@color/md3_dark_error</item>
+        <item name="colorOnError">@color/md3_dark_on_error</item>
+        <item name="colorErrorContainer">@color/md3_dark_error_container</item>
+        <item name="colorOnErrorContainer">@color/md3_dark_on_error_container</item>
+        <item name="colorSurfaceDim">@color/md3_dark_surface_dim</item>
+        <item name="colorSurfaceBright">@color/md3_dark_surface_bright</item>
+        <item name="colorSurfaceVariant">@color/md3_dark_surface_variant</item>
+        <item name="android:colorBackground">@color/black</item>
+        <item name="android:navigationBarColor">@color/black</item>
+        <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">false</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="preferenceTheme">@style/PreferenceThemeOverlay.OasisBrowser</item>
+        <item name="popupMenuStyle">@style/Widget.OasisBrowser.PopupMenu</item>
+        <item name="toolbarStyle">@style/Widget.OasisBrowser.Toolbar</item>
+        <item name="toolbarSurfaceStyle">@style/Widget.OasisBrowser.Toolbar.Surface</item>
+        <item name="drawerBackground">@color/md3_black_surface_container</item>
+        <item name="railBackground">@color/black</item>
+        <item name="dividerColor">@color/md3_black_surface_container_highest</item>
+
+        <item name="iconColor">@color/icon_dark_theme</item>
+        <item name="iconColorState">@color/state_color_icons_dark</item>
+
+        <item name="autoCompleteBackgroundColor">@color/md3_black_surface_container_high</item>
+        <item name="autoCompleteTitleColor">@color/md3_dark_on_surface</item>
+        <item name="autoCompleteUrlColor">@color/md3_dark_on_surface_variant</item>
+
+        <item name="selectedBackground">@color/md3_dark_primary_container</item>
+
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="android:windowContentOverlay">@null</item>
+
+        <!-- Overflow menu -->
+        <item name="actionOverflowButtonStyle">@style/overFlowButtonStyle</item>
+
+        <!-- Alert dialogs -->
+        <item name="alertDialogTheme">@style/MaterialDialogStyle.Black</item>
+        <item name="materialAlertDialogTheme">@style/MaterialDialogStyle.Black</item>
+    </style>
+
+    <!-- User-selectable accent overlays. The surface and text roles remain theme-specific. -->
+    <style name="ThemeOverlay" />
+    <style name="ThemeOverlay.OasisBrowser" />
+    <style name="ThemeOverlay.OasisBrowser.Accent" />
+    <style name="ThemeOverlay.OasisBrowser.Accent.Base" />
+    <style name="ThemeOverlay.OasisBrowser.Accent.Base.Light">
+        <item name="colorOnPrimary">#FFFFFF</item>
+        <item name="colorOnSecondary">#FFFFFF</item>
+        <item name="colorOnTertiary">#FFFFFF</item>
+        <item name="selectedBackground">?attr/colorPrimaryContainer</item>
+        <item name="progressBackgroundColor">?attr/colorPrimaryContainer</item>
+        <item name="sheetBackground">?attr/colorSurfaceContainer</item>
+        <item name="sheetHeaderBackground">?attr/colorSurfaceContainerHigh</item>
+        <item name="sheetFooterBackground">?attr/colorSurfaceContainerHigh</item>
+        <item name="sheetHandleColor">?attr/colorOutline</item>
+        <item name="drawerBackground">?attr/colorSurfaceContainer</item>
+        <item name="dividerColor">?attr/colorOutlineVariant</item>
+        <item name="autoCompleteBackgroundColor">?attr/colorSurfaceContainerHigh</item>
+    </style>
+    <style name="ThemeOverlay.OasisBrowser.Accent.Base.Dark">
+        <item name="colorOnPrimary">#101010</item>
+        <item name="colorOnSecondary">#101010</item>
+        <item name="colorOnTertiary">#101010</item>
+        <item name="selectedBackground">?attr/colorPrimaryContainer</item>
+        <item name="progressBackgroundColor">?attr/colorPrimaryContainer</item>
+        <item name="sheetBackground">?attr/colorSurfaceContainer</item>
+        <item name="sheetHeaderBackground">?attr/colorSurfaceContainerHigh</item>
+        <item name="sheetFooterBackground">?attr/colorSurfaceContainerHigh</item>
+        <item name="sheetHandleColor">?attr/colorOutline</item>
+        <item name="drawerBackground">?attr/colorSurfaceContainer</item>
+        <item name="dividerColor">?attr/colorOutlineVariant</item>
+        <item name="autoCompleteBackgroundColor">?attr/colorSurfaceContainerHigh</item>
+    </style>
+
+    <style name="ThemeOverlay.OasisBrowser.Accent.Teal_Light" parent="ThemeOverlay.OasisBrowser.Accent.Base.Light">
+        <item name="colorAccent">#006A6A</item><item name="colorPrimaryContainer">#9CF1EE</item>
+        <item name="colorSecondary">#4A6361</item><item name="colorSecondaryContainer">#CCE8E5</item>
+        <item name="colorTertiary">#6B5D7B</item><item name="colorTertiaryContainer">#F2DAFF</item>
+    </style>
+    <style name="ThemeOverlay.OasisBrowser.Accent.Blue_Light" parent="ThemeOverlay.OasisBrowser.Accent.Base.Light">
+        <item name="colorAccent">#2563EB</item><item name="colorPrimaryContainer">#D8E2FF</item>
+        <item name="colorSecondary">#585E71</item><item name="colorSecondaryContainer">#DCE2F9</item>
+        <item name="colorTertiary">#725572</item><item name="colorTertiaryContainer">#FFD7F3</item>
+    </style>
+    <style name="ThemeOverlay.OasisBrowser.Accent.Indigo_Light" parent="ThemeOverlay.OasisBrowser.Accent.Base.Light">
+        <item name="colorAccent">#4F46E5</item><item name="colorPrimaryContainer">#E0E0FF</item>
+        <item name="colorSecondary">#5C5D72</item><item name="colorSecondaryContainer">#E1E0F9</item>
+        <item name="colorTertiary">#76586A</item><item name="colorTertiaryContainer">#FFD9E5</item>
+    </style>
+    <style name="ThemeOverlay.OasisBrowser.Accent.Purple_Light" parent="ThemeOverlay.OasisBrowser.Accent.Base.Light">
+        <item name="colorAccent">#7C3AED</item><item name="colorPrimaryContainer">#EADDFF</item>
+        <item name="colorSecondary">#655A6F</item><item name="colorSecondaryContainer">#ECDDF4</item>
+        <item name="colorTertiary">#805248</item><item name="colorTertiaryContainer">#FFDBD1</item>
+    </style>
+    <style name="ThemeOverlay.OasisBrowser.Accent.Pink_Light" parent="ThemeOverlay.OasisBrowser.Accent.Base.Light">
+        <item name="colorAccent">#DB2777</item><item name="colorPrimaryContainer">#FFD9E5</item>
+        <item name="colorSecondary">#745663</item><item name="colorSecondaryContainer">#FFD9E5</item>
+        <item name="colorTertiary">#765C2E</item><item name="colorTertiaryContainer">#FFDEA6</item>
+    </style>
+    <style name="ThemeOverlay.OasisBrowser.Accent.Red_Light" parent="ThemeOverlay.OasisBrowser.Accent.Base.Light">
+        <item name="colorAccent">#DC2626</item><item name="colorPrimaryContainer">#FFDAD6</item>
+        <item name="colorSecondary">#765654</item><item name="colorSecondaryContainer">#FFDBD7</item>
+        <item name="colorTertiary">#715B2E</item><item name="colorTertiaryContainer">#FFDEA6</item>
+    </style>
+    <style name="ThemeOverlay.OasisBrowser.Accent.Orange_Light" parent="ThemeOverlay.OasisBrowser.Accent.Base.Light">
+        <item name="colorAccent">#EA580C</item><item name="colorPrimaryContainer">#FFDBCA</item>
+        <item name="colorSecondary">#765A4E</item><item name="colorSecondaryContainer">#FFDBC9</item>
+        <item name="colorTertiary">#655F31</item><item name="colorTertiaryContainer">#E9E7AA</item>
+    </style>
+    <style name="ThemeOverlay.OasisBrowser.Accent.Green_Light" parent="ThemeOverlay.OasisBrowser.Accent.Base.Light">
+        <item name="colorAccent">#16A34A</item><item name="colorPrimaryContainer">#A4F4AF</item>
+        <item name="colorSecondary">#526553</item><item name="colorSecondaryContainer">#D4E8D3</item>
+        <item name="colorTertiary">#376477</item><item name="colorTertiaryContainer">#BDEAF8</item>
+    </style>
+
+    <style name="ThemeOverlay.OasisBrowser.Accent.Teal_Dark" parent="ThemeOverlay.OasisBrowser.Accent.Base.Dark">
+        <item name="colorAccent">#80D5D1</item><item name="colorPrimary">#00504F</item><item name="colorPrimaryContainer">#00504F</item>
+        <item name="colorSurface">#101918</item><item name="colorSurfaceContainerLow">#141D1C</item><item name="colorSurfaceContainer">#172120</item><item name="colorSurfaceContainerHigh">#222B2A</item><item name="colorSurfaceContainerHighest">#2D3635</item>
+        <item name="colorSecondary">#B0CCCA</item><item name="colorSecondaryContainer">#324B49</item>
+        <item name="colorTertiary">#D6BEE6</item><item name="colorTertiaryContainer">#534160</item>
+    </style>
+    <style name="ThemeOverlay.OasisBrowser.Accent.Blue_Dark" parent="ThemeOverlay.OasisBrowser.Accent.Base.Dark">
+        <item name="colorAccent">#B1C5FF</item><item name="colorPrimary">#084399</item><item name="colorPrimaryContainer">#084399</item>
+        <item name="colorSurface">#10141F</item><item name="colorSurfaceContainerLow">#151A27</item><item name="colorSurfaceContainer">#1B2232</item><item name="colorSurfaceContainerHigh">#252E42</item><item name="colorSurfaceContainerHighest">#303B53</item>
+        <item name="colorSecondary">#C0C6DD</item><item name="colorSecondaryContainer">#414659</item>
+        <item name="colorTertiary">#E2BBDD</item><item name="colorTertiaryContainer">#5A3F58</item>
+    </style>
+    <style name="ThemeOverlay.OasisBrowser.Accent.Indigo_Dark" parent="ThemeOverlay.OasisBrowser.Accent.Base.Dark">
+        <item name="colorAccent">#BEC2FF</item><item name="colorPrimary">#37349A</item><item name="colorPrimaryContainer">#37349A</item>
+        <item name="colorSurface">#11111F</item><item name="colorSurfaceContainerLow">#17172A</item><item name="colorSurfaceContainer">#1F1F38</item><item name="colorSurfaceContainerHigh">#29294A</item><item name="colorSurfaceContainerHighest">#34345C</item>
+        <item name="colorSecondary">#C5C5E0</item><item name="colorSecondaryContainer">#45455B</item>
+        <item name="colorTertiary">#E8B9C9</item><item name="colorTertiaryContainer">#5B414A</item>
+    </style>
+    <style name="ThemeOverlay.OasisBrowser.Accent.Purple_Dark" parent="ThemeOverlay.OasisBrowser.Accent.Base.Dark">
+        <item name="colorAccent">#D0BCFF</item><item name="colorPrimary">#4F378B</item><item name="colorPrimaryContainer">#4F378B</item>
+        <item name="colorSurface">#15101F</item><item name="colorSurfaceContainerLow">#1C1628</item><item name="colorSurfaceContainer">#261E36</item><item name="colorSurfaceContainerHigh">#32284A</item><item name="colorSurfaceContainerHighest">#3E325D</item>
+        <item name="colorSecondary">#D0C2D8</item><item name="colorSecondaryContainer">#4A4458</item>
+        <item name="colorTertiary">#F5B9A8</item><item name="colorTertiaryContainer">#603D35</item>
+    </style>
+    <style name="ThemeOverlay.OasisBrowser.Accent.Pink_Dark" parent="ThemeOverlay.OasisBrowser.Accent.Base.Dark">
+        <item name="colorAccent">#FFB0CA</item><item name="colorPrimary">#8F0F4C</item><item name="colorPrimaryContainer">#8F0F4C</item>
+        <item name="colorSurface">#1E1018</item><item name="colorSurfaceContainerLow">#28151F</item><item name="colorSurfaceContainer">#351C29</item><item name="colorSurfaceContainerHigh">#452436</item><item name="colorSurfaceContainerHighest">#552B42</item>
+        <item name="colorSecondary">#E4BDC8</item><item name="colorSecondaryContainer">#5A3F48</item>
+        <item name="colorTertiary">#E5C58D</item><item name="colorTertiaryContainer">#59441F</item>
+    </style>
+    <style name="ThemeOverlay.OasisBrowser.Accent.Red_Dark" parent="ThemeOverlay.OasisBrowser.Accent.Base.Dark">
+        <item name="colorAccent">#FFB4AB</item><item name="colorPrimary">#930006</item><item name="colorPrimaryContainer">#930006</item>
+        <item name="colorSurface">#1D1010</item><item name="colorSurfaceContainerLow">#271515</item><item name="colorSurfaceContainer">#351C1C</item><item name="colorSurfaceContainerHigh">#452424</item><item name="colorSurfaceContainerHighest">#572C2C</item>
+        <item name="colorSecondary">#E7BDB8</item><item name="colorSecondaryContainer">#5D3F3C</item>
+        <item name="colorTertiary">#DFC58A</item><item name="colorTertiaryContainer">#55451B</item>
+    </style>
+    <style name="ThemeOverlay.OasisBrowser.Accent.Orange_Dark" parent="ThemeOverlay.OasisBrowser.Accent.Base.Dark">
+        <item name="colorAccent">#FFB695</item><item name="colorPrimary">#8B2F00</item><item name="colorPrimaryContainer">#8B2F00</item>
+        <item name="colorSurface">#1D140E</item><item name="colorSurfaceContainerLow">#281B12</item><item name="colorSurfaceContainer">#352319</item><item name="colorSurfaceContainerHigh">#452E21</item><item name="colorSurfaceContainerHighest">#573A28</item>
+        <item name="colorSecondary">#E6BFAE</item><item name="colorSecondaryContainer">#5C4035</item>
+        <item name="colorTertiary">#D2CC8D</item><item name="colorTertiaryContainer">#4D4D1F</item>
+    </style>
+    <style name="ThemeOverlay.OasisBrowser.Accent.Green_Dark" parent="ThemeOverlay.OasisBrowser.Accent.Base.Dark">
+        <item name="colorAccent">#88D992</item><item name="colorPrimary">#00531F</item><item name="colorPrimaryContainer">#00531F</item>
+        <item name="colorSurface">#101B14</item><item name="colorSurfaceContainerLow">#14261A</item><item name="colorSurfaceContainer">#1B3221</item><item name="colorSurfaceContainerHigh">#26442D</item><item name="colorSurfaceContainerHighest">#31573A</item>
+        <item name="colorSecondary">#B8CCB5</item><item name="colorSecondaryContainer">#394B39</item>
+        <item name="colorTertiary">#A7CFDF</item><item name="colorTertiaryContainer">#1E4D5F</item>
+    </style>
+
+    <!-- AMOLED keeps only the deepest surface pure black; elevated containers retain contrast. -->
+    <style name="ThemeOverlay.OasisBrowser.Accent.Teal_Black" parent="ThemeOverlay.OasisBrowser.Accent.Teal_Dark">
+        <item name="colorSurface">@color/black</item>
+        <item name="android:colorBackground">@color/black</item>
+    </style>
+    <style name="ThemeOverlay.OasisBrowser.Accent.Blue_Black" parent="ThemeOverlay.OasisBrowser.Accent.Blue_Dark">
+        <item name="colorSurface">@color/black</item>
+        <item name="android:colorBackground">@color/black</item>
+    </style>
+    <style name="ThemeOverlay.OasisBrowser.Accent.Indigo_Black" parent="ThemeOverlay.OasisBrowser.Accent.Indigo_Dark">
+        <item name="colorSurface">@color/black</item>
+        <item name="android:colorBackground">@color/black</item>
+    </style>
+    <style name="ThemeOverlay.OasisBrowser.Accent.Purple_Black" parent="ThemeOverlay.OasisBrowser.Accent.Purple_Dark">
+        <item name="colorSurface">@color/black</item>
+        <item name="android:colorBackground">@color/black</item>
+    </style>
+    <style name="ThemeOverlay.OasisBrowser.Accent.Pink_Black" parent="ThemeOverlay.OasisBrowser.Accent.Pink_Dark">
+        <item name="colorSurface">@color/black</item>
+        <item name="android:colorBackground">@color/black</item>
+    </style>
+    <style name="ThemeOverlay.OasisBrowser.Accent.Red_Black" parent="ThemeOverlay.OasisBrowser.Accent.Red_Dark">
+        <item name="colorSurface">@color/black</item>
+        <item name="android:colorBackground">@color/black</item>
+    </style>
+    <style name="ThemeOverlay.OasisBrowser.Accent.Orange_Black" parent="ThemeOverlay.OasisBrowser.Accent.Orange_Dark">
+        <item name="colorSurface">@color/black</item>
+        <item name="android:colorBackground">@color/black</item>
+    </style>
+    <style name="ThemeOverlay.OasisBrowser.Accent.Green_Black" parent="ThemeOverlay.OasisBrowser.Accent.Green_Dark">
+        <item name="colorSurface">@color/black</item>
+        <item name="android:colorBackground">@color/black</item>
+    </style>
+    <style name="ThemeOverlay.OasisBrowser.Accent.System_Light" parent="ThemeOverlay.OasisBrowser.Accent.Teal_Light" />
+    <style name="ThemeOverlay.OasisBrowser.Accent.System_Dark" parent="ThemeOverlay.OasisBrowser.Accent.Teal_Dark" />
+    <style name="ThemeOverlay.OasisBrowser.Accent.System_Black" parent="ThemeOverlay.OasisBrowser.Accent.Teal_Black" />
+
+    <!-- AlertDialog Theming -->
+    <style name="MaterialDialogStyle.Light" parent="ThemeOverlay.Material3.MaterialAlertDialog">
+        <!-- Material buttons use colorPrimary for their enabled label color. Resolve it from
+             the already-applied activity accent instead of the neutral light surface. -->
+        <item name="colorPrimary">?attr/colorAccent</item>
+    </style>
+
+    <style name="MaterialDialogStyle.Dark" parent="ThemeOverlay.Material3.MaterialAlertDialog">
+        <item name="colorPrimary">?attr/colorAccent</item>
+    </style>
+
+    <style name="MaterialDialogStyle.Black" parent="ThemeOverlay.Material3.MaterialAlertDialog">
+        <item name="colorPrimary">?attr/colorAccent</item>
+    </style>
+
+    <style name="Widget.OasisBrowser.Toolbar" parent="Widget.Material3Expressive.Toolbar.AppBarWithSearch">
+        <item name="android:background">@drawable/toolbar_expressive</item>
+        <item name="titleTextColor">?attr/colorOnSurface</item>
+        <item name="subtitleTextColor">?attr/colorOnSurfaceVariant</item>
+        <item name="navigationIconTint">?attr/colorOnSurface</item>
+        <item name="popupTheme">@style/ThemeOverlay.OasisBrowser.Toolbar.Surface</item>
+        <item name="android:elevation">0dp</item>
+    </style>
+
+    <style name="Widget.OasisBrowser.Toolbar.Surface" parent="Widget.Material3Expressive.Toolbar.Surface">
+        <item name="android:background">@drawable/toolbar_expressive</item>
+    </style>
+
+    <style name="ThemeOverlay.OasisBrowser.Toolbar.Surface" parent="ThemeOverlay.Material3Expressive.Toolbar.Surface">
+        <item name="android:popupMenuStyle">@style/Widget.OasisBrowser.PopupMenu</item>
+        <item name="popupMenuStyle">@style/Widget.OasisBrowser.PopupMenu</item>
+        <item name="colorSurface">?attr/colorSurfaceContainerHighest</item>
+    </style>
+
+    <style name="Widget.OasisBrowser.PopupMenu" parent="Widget.Material3.PopupMenu">
+        <item name="android:popupBackground">@drawable/popup_menu_background_expressive</item>
+        <item name="android:popupElevation">12dp</item>
+        <item name="android:dropDownSelector">@drawable/popup_menu_item_background_expressive</item>
+        <item name="android:textColorPrimary">?attr/colorOnSurface</item>
+    </style>
+
+    <style name="PreferenceThemeOverlay.OasisBrowser" parent="@style/PreferenceThemeOverlay">
+        <item name="preferenceCategoryStyle">@style/Preference.Category.OasisBrowser</item>
+        <item name="preferenceStyle">@style/Preference.OasisBrowser</item>
+        <item name="checkBoxPreferenceStyle">@style/Preference.CheckBoxPreference.OasisBrowser</item>
+        <item name="dialogPreferenceStyle">@style/Preference.DialogPreference.OasisBrowser</item>
+        <item name="switchPreferenceCompatStyle">@style/Preference.SwitchPreferenceCompat.OasisBrowser</item>
+        <item name="preferenceFragmentCompatStyle">@style/PreferenceFragment.OasisBrowser</item>
+        <item name="preferenceFragmentStyle">@style/PreferenceFragment.OasisBrowser</item>
+        <item name="preferenceFragmentListStyle">@style/PreferenceFragmentList.OasisBrowser</item>
+        <item name="preferenceCategoryTitleTextAppearance">@style/TextAppearance.OasisBrowser.PreferenceCategory</item>
+    </style>
+
+    <style name="Preference.OasisBrowser" parent="@style/Preference.Material">
+        <item name="singleLineTitle">false</item>
+        <item name="android:layout" tools:ignore="PrivateResource">@layout/preference_material</item>
+    </style>
+
+    <style name="Preference.DialogPreference.OasisBrowser" parent="@style/Preference.DialogPreference.Material">
+        <item name="android:layout" tools:ignore="PrivateResource">@layout/preference_material</item>
+    </style>
+
+    <style name="Preference.CheckBoxPreference.OasisBrowser" parent="@style/Preference.CheckBoxPreference.Material">
+        <item name="android:layout" tools:ignore="PrivateResource">@layout/preference_material</item>
+    </style>
+
+    <style name="Preference.SwitchPreferenceCompat.OasisBrowser" parent="@style/Preference.SwitchPreferenceCompat.Material">
+        <item name="android:layout" tools:ignore="PrivateResource">@layout/preference_material</item>
+        <item name="android:widgetLayout" tools:ignore="PrivateResource">@layout/preference_widget_switch_compat</item>
+    </style>
+
+    <style name="Preference.Category.OasisBrowser" parent="@style/Preference.Category.Material">
+        <item name="android:layout" tools:ignore="PrivateResource">@layout/preference_category_material</item>
+    </style>
+
+    <style name="PreferenceFragment.OasisBrowser" parent="@style/PreferenceFragment.Material">
+        <item name="android:divider">@android:color/transparent</item>
+    </style>
+
+    <style name="PreferenceFragmentList.OasisBrowser" parent="@style/PreferenceFragmentList.Material" />
+
+    <style name="TextAppearance.OasisBrowser.PreferenceCategory" parent="TextAppearance.Material3.LabelLarge">
+        <item name="android:textColor">?attr/colorOnSurfaceVariant</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="TextAppearance.OasisBrowser.PreferenceTitle" parent="TextAppearance.Material3.BodyLarge">
+        <item name="android:textColor">?attr/colorOnSurface</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="TextAppearance.OasisBrowser.PreferenceSummary" parent="TextAppearance.Material3.BodyMedium">
+        <item name="android:textColor">?attr/colorOnSurfaceVariant</item>
+    </style>
+
+    <style name="TextAppearance.OasisBrowser.DialogTitle" parent="TextAppearance.Material3.TitleLarge">
+        <item name="android:textColor">?attr/colorOnSurface</item>
+    </style>
+
+    <style name="TextAppearance.OasisBrowser.DialogItem" parent="TextAppearance.Material3.BodyLarge">
+        <item name="android:textColor">?attr/colorOnSurface</item>
+    </style>
+
+    <style name="TextAppearance.OasisBrowser.TabTitle" parent="TextAppearance.Material3.LabelLarge">
+        <item name="android:textColor">?attr/colorOnSurface</item>
+    </style>
+
+    <style name="TextAppearance.OasisBrowser.TabTitle.Selected" parent="TextAppearance.Material3.LabelLarge">
+        <item name="android:textColor">?attr/colorOnSurface</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="TextAppearance.OasisBrowser.RowPrimary" parent="TextAppearance.Material3.BodyLarge">
+        <item name="android:textColor">?attr/colorOnSurface</item>
+    </style>
+
+    <style name="TextAppearance.OasisBrowser.RowSecondary" parent="TextAppearance.Material3.BodyMedium">
+        <item name="android:textColor">?attr/colorOnSurfaceVariant</item>
+    </style>
+
+    <!-- Overflow Menu Customization -->
+    <style name="overFlowButtonStyle" parent="@style/Widget.AppCompat.ActionButton.Overflow">
+        <item name="android:background">@drawable/oasisbrowser_blend_button_background</item>
+        <item name="android:minWidth">48dp</item>
+        <item name="android:padding">0dp</item>
+    </style>
+
+    <!-- Text Customization -->
+
+</resources>
