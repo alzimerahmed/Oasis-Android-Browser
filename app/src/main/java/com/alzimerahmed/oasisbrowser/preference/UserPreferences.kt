@@ -407,7 +407,7 @@ class UserPreferences @Inject constructor(
     /** Placement of the OasisBrowser rail; horizontal placements are experimental. */
     var oasisbrowserRailPosition by preferences.enumPreference(
         OasisBrowser_RAIL_POSITION,
-        if (oasisbrowserRailOnLeft) OasisBrowserRailPosition.LEFT else OasisBrowserRailPosition.RIGHT
+        OasisBrowserRailPosition.TOP
     )
 
     /** True when the QR scanner and Tabs controls should exchange their rail positions. */

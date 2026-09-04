@@ -20,11 +20,11 @@
     <dimen name="preference_group_inner_corner_radius">8dp</dimen>
     <dimen name="preference_group_gap">3dp</dimen>
     <dimen name="browser_icon_button_size">40dp</dimen>
-    <dimen name="oasisbrowser_rail_width">72dp</dimen>
-    <dimen name="oasisbrowser_rail_button_size">48dp</dimen>
-    <dimen name="oasisbrowser_address_rail_width">52dp</dimen>
-    <dimen name="oasisbrowser_address_rail_top_gap">22dp</dimen>
-    <dimen name="oasisbrowser_content_rail_gap">72dp</dimen>
+    <dimen name="oasisbrowser_rail_width">56dp</dimen>
+    <dimen name="oasisbrowser_rail_button_size">40dp</dimen>
+    <dimen name="oasisbrowser_address_rail_width">44dp</dimen>
+    <dimen name="oasisbrowser_address_rail_top_gap">12dp</dimen>
+    <dimen name="oasisbrowser_content_rail_gap">56dp</dimen>
     <dimen name="browser_handle_width">36dp</dimen>
     <dimen name="browser_handle_height">4dp</dimen>
 

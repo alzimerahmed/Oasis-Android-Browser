@@ -53,7 +53,7 @@
                     android:layout_gravity="top"
                     android:layout_marginStart="@dimen/chrome_outer_margin"
                     android:layout_marginTop="@dimen/chrome_outer_margin"
-                    android:layout_marginEnd="86dp"
+                    android:layout_marginEnd="68dp"
                     android:background="@android:color/transparent"
                     android:elevation="10dp"
                     android:padding="0dp"
@@ -147,10 +147,10 @@
                     android:clipToPadding="false"
                     android:elevation="8dp"
                     android:fitsSystemWindows="true"
-                    android:paddingStart="10dp"
-                    android:paddingTop="42dp"
-                    android:paddingEnd="10dp"
-                    android:paddingBottom="28dp"
+                    android:paddingStart="6dp"
+                    android:paddingTop="20dp"
+                    android:paddingEnd="6dp"
+                    android:paddingBottom="16dp"
                     android:tag="oasisbrowser_fixed_chrome">
 
                     <LinearLayout
@@ -184,8 +184,8 @@
 
                         <com.alzimerahmed.oasisbrowser.icon.TabCountView
                             android:id="@+id/tab_count_view"
-                            android:layout_width="26dp"
-                            android:layout_height="26dp"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
                             android:layout_gravity="center"
                             app:tabIconBorderRadius="6dp"
                             app:tabIconBorderWidth="2dp"
@@ -222,8 +222,8 @@
 
                             <ImageView
                                 android:id="@+id/settings_button"
-                                android:layout_width="34dp"
-                                android:layout_height="34dp"
+                                android:layout_width="32dp"
+                                android:layout_height="32dp"
                                 android:background="@drawable/oasisbrowser_blend_button_background"
                                 android:clickable="true"
                                 android:contentDescription="@string/action_refresh"
@@ -261,8 +261,8 @@
 
                             <ImageView
                                 android:id="@+id/search_refresh"
-                                android:layout_width="38dp"
-                                android:layout_height="38dp"
+                                android:layout_width="34dp"
+                                android:layout_height="34dp"
                                 android:background="@drawable/oasisbrowser_blend_button_background"
                                 android:clickable="true"
                                 android:contentDescription="@string/action_scan_qr"
@@ -292,8 +292,8 @@
 
                         <ImageView
                             android:id="@+id/action_back"
-                            android:layout_width="42dp"
-                            android:layout_height="42dp"
+                            android:layout_width="38dp"
+                            android:layout_height="38dp"
                             android:background="@drawable/oasisbrowser_blend_button_background"
                             android:clickable="true"
                             android:contentDescription="@string/action_back"
@@ -304,9 +304,9 @@
 
                         <ImageView
                             android:id="@+id/action_forward"
-                            android:layout_width="42dp"
-                            android:layout_height="42dp"
-                            android:layout_marginTop="6dp"
+                            android:layout_width="38dp"
+                            android:layout_height="38dp"
+                            android:layout_marginTop="4dp"
                             android:background="@drawable/oasisbrowser_blend_button_background"
                             android:clickable="true"
                             android:contentDescription="@string/action_forward"
@@ -317,9 +317,9 @@
 
                         <ImageView
                             android:id="@+id/action_home"
-                            android:layout_width="42dp"
-                            android:layout_height="42dp"
-                            android:layout_marginTop="6dp"
+                            android:layout_width="38dp"
+                            android:layout_height="38dp"
+                            android:layout_marginTop="4dp"
                             android:background="@drawable/oasisbrowser_blend_button_background"
                             android:clickable="true"
                             android:contentDescription="@string/action_homepage"
@@ -330,9 +330,9 @@
 
                         <ImageView
                             android:id="@+id/action_add_bookmark"
-                            android:layout_width="42dp"
-                            android:layout_height="42dp"
-                            android:layout_marginTop="6dp"
+                            android:layout_width="38dp"
+                            android:layout_height="38dp"
+                            android:layout_marginTop="4dp"
                             android:background="@drawable/oasisbrowser_blend_button_background"
                             android:clickable="true"
                             android:contentDescription="@string/action_add_bookmark"
@@ -357,11 +357,11 @@
 
                         <com.google.android.material.appbar.MaterialToolbar
                             android:id="@+id/toolbar"
-                            android:layout_width="42dp"
-                            android:layout_height="42dp"
-                            android:layout_marginTop="6dp"
+                            android:layout_width="38dp"
+                            android:layout_height="38dp"
+                            android:layout_marginTop="2dp"
                             android:background="@drawable/oasisbrowser_blend_button_background"
-                            android:minHeight="42dp"
+                            android:minHeight="38dp"
                             android:padding="0dp"
                             app:contentInsetEnd="0dp"
                             app:contentInsetStart="0dp"
@@ -377,7 +377,7 @@
                     android:layout_height="@dimen/material_grid_touch_medium"
                     android:layout_gravity="bottom"
                     android:layout_marginStart="@dimen/chrome_outer_margin"
-                    android:layout_marginEnd="86dp"
+                    android:layout_marginEnd="68dp"
                     android:layout_marginBottom="@dimen/chrome_outer_margin"
                     android:background="@drawable/find_bar_background"
                     android:elevation="10dp"

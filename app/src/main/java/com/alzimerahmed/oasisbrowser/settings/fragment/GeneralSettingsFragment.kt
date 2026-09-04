@@ -734,12 +734,8 @@ class GeneralSettingsFragment : AbstractSettingsFragment() {
         }
     }
 
-    private fun currentRailPosition(): OasisBrowserRailPosition {
-        val stored = userPreferences.oasisbrowserRailPosition
-        return if (stored.isExperimental && !developerPreferences.experimentalRailLayoutsEnabled) {
-            if (userPreferences.oasisbrowserRailOnLeft) OasisBrowserRailPosition.LEFT else OasisBrowserRailPosition.RIGHT
-        } else stored
-    }
+    private fun currentRailPosition(): OasisBrowserRailPosition =
+        userPreferences.oasisbrowserRailPosition
 
     private fun OasisBrowserRailPosition.toRailPositionDisplayString(): String = getString(
         when (this) {
