@@ -1,15 +1,16 @@
 # Oasis Browser baseline profile
 # This file lists classes and methods that should be AOT compiled to improve cold start.
+# Rules must carry flags (H=hot, S=startup, P=post-startup); L marks the class as loaded.
 
-Lcom/alzimerahmed/oasisbrowser/BrowserApp;->onCreate()V
-Lcom/alzimerahmed/oasisbrowser/BrowserApp;-><init>()V
-Lcom/alzimerahmed/oasisbrowser/browser/BrowserActivity;->onCreate(Landroid/os/Bundle;)V
-Lcom/alzimerahmed/oasisbrowser/browser/BrowserActivity;->onResume()V
-Lcom/alzimerahmed/oasisbrowser/browser/BrowserActivity;->onStart()V
-Lcom/alzimerahmed/oasisbrowser/ThemableBrowserActivity;->onCreate(Landroid/os/Bundle;)V
-Lcom/alzimerahmed/oasisbrowser/ThemableBrowserActivity;->onResume()V
-Lcom/alzimerahmed/oasisbrowser/AccentPalette;->overlayFor(II)I
-Lcom/alzimerahmed/oasisbrowser/AccentPalette;->overlayFor(Lcom/alzimerahmed/oasisbrowser/AppTheme;I)I
-Lcom/alzimerahmed/oasisbrowser/utils/ThemeUtils;->getStatusBarColor(Landroid/content/Context;)I
-Lcom/alzimerahmed/oasisbrowser/utils/CustomFontManager;->applyToViewTree(Landroid/view/View;Ljava/lang/String;)V
-Lcom/alzimerahmed/oasisbrowser/preference/UserPreferences;-><init>(Landroid/content/Context;)V
+HSPLcom/alzimerahmed/oasisbrowser/BrowserApp;->onCreate()V
+HSPLcom/alzimerahmed/oasisbrowser/BrowserApp;-><init>()V
+HSPLcom/alzimerahmed/oasisbrowser/browser/BrowserActivity;->onCreate(Landroid/os/Bundle;)V
+HSPLcom/alzimerahmed/oasisbrowser/browser/BrowserActivity;->onResume()V
+HSPLcom/alzimerahmed/oasisbrowser/browser/BrowserActivity;->onStart()V
+HSPLcom/alzimerahmed/oasisbrowser/ThemableBrowserActivity;->onCreate(Landroid/os/Bundle;)V
+HSPLcom/alzimerahmed/oasisbrowser/ThemableBrowserActivity;->onResume()V
+HSPLcom/alzimerahmed/oasisbrowser/AccentPalette;->overlayFor(II)I
+HSPLcom/alzimerahmed/oasisbrowser/AccentPalette;->overlayFor(Lcom/alzimerahmed/oasisbrowser/AppTheme;I)I
+HSPLcom/alzimerahmed/oasisbrowser/utils/ThemeUtils;->getStatusBarColor(Landroid/content/Context;)I
+HSPLcom/alzimerahmed/oasisbrowser/utils/CustomFontManager;->applyToViewTree(Landroid/view/View;Ljava/lang/String;)V
+HSPLcom/alzimerahmed/oasisbrowser/preference/UserPreferences;-><init>(Landroid/content/Context;)V
