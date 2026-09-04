@@ -82,7 +82,10 @@ class SuggestionsAdapter(
         searchFilter.input().results()
             .subscribeOn(databaseScheduler)
             .observeOn(mainScheduler)
-            .subscribe(::publishResults)
+            .subscribe(
+                ::publishResults,
+                { error -> android.util.Log.e("SuggestionsAdapter", "Suggestion query failed", error) }
+            )
             .also(disposables::add)
     }
 
@@ -97,9 +100,10 @@ class SuggestionsAdapter(
     fun refreshBookmarks() {
         bookmarkRepository.getAllBookmarksSorted()
             .subscribeOn(databaseScheduler)
-            .subscribe { list ->
-                allBookmarks = list
-            }.also(disposables::add)
+            .subscribe(
+                { list -> allBookmarks = list },
+                { error -> android.util.Log.e("SuggestionsAdapter", "Bookmark refresh failed", error) }
+            ).also(disposables::add)
     }
 
     override fun getCount(): Int = filteredList.size

@@ -615,7 +615,10 @@ class BrowserPresenter @Inject constructor(
         compositeDisposable += collectionRepository.addCollectionItem(item)
             .subscribeOn(databaseScheduler)
             .observeOn(mainScheduler)
-            .subscribe()
+            .subscribe(
+                {},
+                { e -> android.util.Log.e("BrowserPresenter", "addCollectionItem failed", e) }
+            )
     }
 
     private fun addToHomeScreen() {
@@ -645,7 +648,10 @@ class BrowserPresenter @Inject constructor(
             )
                 .subscribeOn(databaseScheduler)
                 .observeOn(mainScheduler)
-                .subscribe()
+                .subscribe(
+                    {},
+                    { e -> android.util.Log.e("BrowserPresenter", "addReadingListEntry failed", e) }
+                )
         }
     }
 
@@ -1871,7 +1877,10 @@ class BrowserPresenter @Inject constructor(
         compositeDisposable += tabIds.toObservable()
             .flatMapCompletable { model.deleteTab(it) }
             .subscribeOn(mainScheduler)
-            .subscribe()
+            .subscribe(
+                {},
+                { e -> android.util.Log.e("BrowserPresenter", "tabGroupClose failed", e) }
+            )
     }
 
     private fun triggerTabListRefresh() {
@@ -1887,12 +1896,15 @@ class BrowserPresenter @Inject constructor(
             BrowserContract.CloseTabEvent.CLOSE_CURRENT ->
                 onTabClose(tabListState.tabIndexForId(id))
 
-            BrowserContract.CloseTabEvent.CLOSE_OTHERS -> model.tabsList
+            BrowserContract.CloseTabEvent.CLOSE_OTHERS -> compositeDisposable += model.tabsList
                 .filter { it.id != id }
                 .toObservable()
                 .flatMapCompletable { model.deleteTab(it.id) }
                 .subscribeOn(mainScheduler)
-                .subscribe()
+                .subscribe(
+                    {},
+                    { e -> android.util.Log.e("BrowserPresenter", "closeOthers failed", e) }
+                )
 
             BrowserContract.CloseTabEvent.CLOSE_ALL ->
                 compositeDisposable += model.deleteAllTabs().subscribeOn(mainScheduler)

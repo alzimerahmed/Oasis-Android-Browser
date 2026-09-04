@@ -15,8 +15,6 @@
 -assumenosideeffects class android.util.Log {
     public static *** d(...);
     public static *** v(...);
-    public static *** w(...);
-    public static *** i(...);
 }
 
 -keep public class org.jsoup.** {
@@ -82,3 +80,94 @@
     public static **[] values();
     public static ** valueOf(java.lang.String);
 }
+
+# ── Dagger 2 ──────────────────────────────────────────────────────────────
+-keep class dagger.** { *; }
+-keep class **_Factory { *; }
+-keep class **_MembersInjector { *; }
+-keep class * extends dagger.internal.Factory
+-keep class * extends dagger.MembersInjector
+-keep,allowobfuscation @javax.inject.Inject class *
+-keep,allowobfuscation @dagger.Reusable class *
+-keep,allowobfuscation @javax.inject.Singleton class *
+-keep,allowobfuscation @dagger.Scope class *
+-keep,allowobfuscation @dagger.Subcomponent class *
+-keep,allowobfuscation @dagger.Module class *
+-keepclassmembers @dagger.Module class * {
+    @dagger.Provides *;
+}
+-keepclasseswithmembers class * {
+    @dagger.Subcomponent.Builder *;
+}
+
+# ── Coil 3 (image loading) ─────────────────────────────────────────────────
+-keep class coil3.** { *; }
+-dontwarn coil3.**
+
+# ── RxJava 3 ───────────────────────────────────────────────────────────────
+-keep class io.reactivex.rxjava3.** { *; }
+-keepclassmembers class io.reactivex.rxjava3.** {
+    public *;
+    protected *;
+}
+-dontwarn io.reactivex.rxjava3.**
+
+# ── Kotlin Coroutines ──────────────────────────────────────────────────────
+-keepclassmembers class kotlinx.coroutines.** { *; }
+-dontwarn kotlinx.coroutines.**
+
+# ── Guava ──────────────────────────────────────────────────────────────────
+-dontwarn com.google.common.**
+-dontwarn com.google.errorprone.**
+-dontwarn com.google.j2objc.**
+-dontwarn org.checkerframework.**
+
+# ── AndroidX DataStore ─────────────────────────────────────────────────────
+-keep class androidx.datastore.** { *; }
+-dontwarn androidx.datastore.**
+
+# ── App: keep all classes in all feature packages ──────────────────────────
+-keep class com.alzimerahmed.oasisbrowser.** { *; }
+-keepclassmembers class com.alzimerahmed.oasisbrowser.** { *; }
+
+# ── Keep app's custom views (referenced from XML layouts by FQCN) ──────────
+-keep class com.alzimerahmed.oasisbrowser.browser.homepage.FocalCropImageView { *; }
+-keep class com.alzimerahmed.oasisbrowser.browser.homepage.NativeHomepageView { *; }
+-keep class com.alzimerahmed.oasisbrowser.search.SearchView { *; }
+-keep class com.alzimerahmed.oasisbrowser.icon.TabCountView { *; }
+-keep class com.alzimerahmed.oasisbrowser.screenshot.ScreenshotCanvasView { *; }
+-keep class com.alzimerahmed.oasisbrowser.reader.ReaderView { *; }
+
+# ── Keep ViewBinding classes ───────────────────────────────────────────────
+-keep class com.alzimerahmed.oasisbrowser.databinding.** { *; }
+
+# ── Keep BuildConfig ───────────────────────────────────────────────────────
+-keep class com.alzimerahmed.oasisbrowser.BuildConfig { *; }
+
+# ── ZXing (barcode/QR core) ────────────────────────────────────────────────
+-keep class com.google.zxing.** { *; }
+-dontwarn com.google.zxing.**
+
+# ── PermissionX ────────────────────────────────────────────────────────────
+-keep class com.guolindev.permissionx.** { *; }
+-dontwarn com.guolindev.permissionx.**
+
+# ── AndroidX Media3 (ExoPlayer) ────────────────────────────────────────────
+-keep class androidx.media3.** { *; }
+-dontwarn androidx.media3.**
+
+# ── Google Material Components ─────────────────────────────────────────────
+-keep class com.google.android.material.** { *; }
+-dontwarn com.google.android.material.**
+
+# ── AndroidX WebKit ────────────────────────────────────────────────────────
+-keep class androidx.webkit.** { *; }
+-dontwarn androidx.webkit.**
+
+# ── AndroidX Preference ────────────────────────────────────────────────────
+-keep class androidx.preference.** { *; }
+-dontwarn androidx.preference.**
+
+# ── JSoup (HTML parsing) ───────────────────────────────────────────────────
+-keep class org.jsoup.** { *; }
+-dontwarn org.jsoup.**

@@ -15,6 +15,9 @@ class DefaultHistoryRecord @Inject constructor(
     override fun visit(title: String, url: String) {
         historyRepository.visitHistoryEntry(url, title)
             .subscribeOn(databaseScheduler)
-            .subscribe()
+            .subscribe(
+                {},
+                { e -> android.util.Log.e("DefaultHistoryRecord", "visit failed", e) }
+            )
     }
 }

@@ -49,7 +49,10 @@ class DefaultBundleStore @Inject constructor(
 
         FileUtils.writeBundleToStorage(application, outState, BUNDLE_STORAGE)
             .subscribeOn(diskScheduler)
-            .subscribe()
+            .subscribe(
+                {},
+                { e -> android.util.Log.e("DefaultBundleStore", "save failed", e) }
+            )
     }
 
     override fun retrieve(): List<TabInitializer> =

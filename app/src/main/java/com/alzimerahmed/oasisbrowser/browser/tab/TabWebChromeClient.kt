@@ -174,7 +174,10 @@ class TabWebChromeClient @Inject constructor(
         val url = view.url ?: return
         faviconModel.cacheFaviconForUrl(icon, url)
             .subscribeOn(diskScheduler)
-            .subscribe()
+            .subscribe(
+                {},
+                { e -> android.util.Log.e("TabWebChromeClient", "cacheFavicon failed", e) }
+            )
         generateColorAndPropagate(icon)
     }
 

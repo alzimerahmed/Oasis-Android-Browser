@@ -170,7 +170,10 @@ class BookmarkPageFactory @Inject constructor(
                 val defaultFavicon = faviconModel.createDefaultBitmapForTitle(entry.title)
                 faviconModel.cacheFaviconForUrl(defaultFavicon, entry.url)
                     .subscribeOn(diskScheduler)
-                    .subscribe()
+                    .subscribe(
+                        {},
+                        { e -> android.util.Log.e("BookmarkPageFactory", "cacheFavicon failed", e) }
+                    )
             }
 
             faviconFile

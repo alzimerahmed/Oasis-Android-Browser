@@ -43,7 +43,10 @@ class PreviewModel @Inject constructor(
                     else -> Completable.complete()
                 }
             }
-            .subscribe()
+            .subscribe(
+                {},
+                { e -> android.util.Log.e("PreviewModel", "preview event failed", e) }
+            )
     }
 
     /**

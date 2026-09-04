@@ -150,7 +150,10 @@ class BookmarkSettingsFragment : AbstractSettingsFragment() {
                 bookmarkRepository
                     .deleteAllBookmarks()
                     .subscribeOn(databaseScheduler)
-                    .subscribe()
+                    .subscribe(
+                        {},
+                        { e -> android.util.Log.e("BookmarkSettings", "deleteAllBookmarks failed", e) }
+                    )
             },
             negativeButton = DialogItem(title = R.string.no) {},
             onCancel = {}

@@ -153,13 +153,18 @@ class NativeHomepageView @JvmOverloads constructor(
                 stateFactory.create()
                     .subscribeOn(diskScheduler)
                     .observeOn(mainScheduler)
-                    .subscribeBy(onSuccess = { state ->
-                        view.render(
-                            state,
-                            adapter,
-                            userPreferences.useTheme.effective(context) == AppTheme.LIGHT,
-                        )
-                    })
+                    .subscribeBy(
+                        onSuccess = { state ->
+                            view.render(
+                                state,
+                                adapter,
+                                userPreferences.useTheme.effective(context) == AppTheme.LIGHT,
+                            )
+                        },
+                        onError = { error ->
+                            android.util.Log.e("NativeHomepageView", "Failed to render homepage state", error)
+                        },
+                    )
                     .also(disposables::add)
                 Unit
             }

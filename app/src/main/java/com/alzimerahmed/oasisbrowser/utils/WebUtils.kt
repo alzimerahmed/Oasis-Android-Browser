@@ -29,7 +29,10 @@ object WebUtils {
     ) {
         historyRepository.deleteHistory()
             .subscribeOn(databaseScheduler)
-            .subscribe()
+            .subscribe(
+                {},
+                { e -> android.util.Log.e("WebUtils", "deleteHistory failed", e) }
+            )
         val webViewDatabase = WebViewDatabase.getInstance(context)
         webViewDatabase.clearFormData()
         webViewDatabase.clearHttpAuthUsernamePassword()

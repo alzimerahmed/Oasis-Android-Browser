@@ -95,9 +95,12 @@ class BrowserApp : Application() {
         }
 
         RxJavaPlugins.setErrorHandler { throwable: Throwable? ->
-            if (BuildConfig.DEBUG && throwable != null) {
-                FileUtils.writeCrashToStorage(this, throwable)
-                throw throwable
+            if (throwable != null) {
+                android.util.Log.e("BrowserApp", "RxJava unhandled error", throwable)
+                if (BuildConfig.DEBUG) {
+                    FileUtils.writeCrashToStorage(this, throwable)
+                    throw throwable
+                }
             }
         }
 
@@ -115,7 +118,10 @@ class BrowserApp : Application() {
             }
             .andThen(migrateLegacyDefaultBookmarks())
             .subscribeOn(databaseScheduler)
-            .subscribe()
+            .subscribe(
+                {},
+                { error -> android.util.Log.e("BrowserApp", "Bookmark initialization failed", error) }
+            )
 
         registerActivityLifecycleCallbacks(proxyAdapter)
     }
