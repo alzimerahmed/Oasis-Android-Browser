@@ -431,15 +431,19 @@ abstract class BrowserActivity : ThemableBrowserActivity(), BrowserContract.View
         // existing icon sizing in the side-rail code path.
         val iconPadding = 12.dp
         val railBinding = binding as? OasisBrowserRailViewDelegate ?: return
+        val railAtTop = activeOasisBrowserRailPosition() == OasisBrowserRailPosition.TOP
         binding.toolbarLayout.updateLayoutParams<FrameLayout.LayoutParams> {
             width = ViewGroup.LayoutParams.MATCH_PARENT
             height = railHeight
-            gravity = if (activeOasisBrowserRailPosition() == OasisBrowserRailPosition.TOP) {
-                Gravity.TOP
-            } else {
-                Gravity.BOTTOM
-            }
+            gravity = if (railAtTop) Gravity.TOP else Gravity.BOTTOM
         }
+        binding.toolbarLayout.setBackgroundResource(
+            if (railAtTop) {
+                R.drawable.oasisbrowser_rail_background_top
+            } else {
+                R.drawable.oasisbrowser_rail_background_bottom
+            }
+        )
         binding.toolbarLayout.setPaddingRelative(
             if (superCompact) 1.dp else 10.dp,
             if (superCompact) 1.dp else 8.dp,
@@ -488,14 +492,14 @@ abstract class BrowserActivity : ThemableBrowserActivity(), BrowserContract.View
             orientation = LinearLayout.HORIZONTAL
             updateLayoutParams<LinearLayout.LayoutParams> {
                 width = ViewGroup.LayoutParams.WRAP_CONTENT
-                height = ViewGroup.LayoutParams.MATCH_PARENT
+                height = ViewGroup.LayoutParams.WRAP_CONTENT
             }
         }
         railBinding.addressBottomActions.apply {
             orientation = LinearLayout.HORIZONTAL
             updateLayoutParams<LinearLayout.LayoutParams> {
                 width = ViewGroup.LayoutParams.WRAP_CONTENT
-                height = ViewGroup.LayoutParams.MATCH_PARENT
+                height = ViewGroup.LayoutParams.WRAP_CONTENT
             }
         }
         railBinding.railNav.apply {
@@ -545,7 +549,7 @@ abstract class BrowserActivity : ThemableBrowserActivity(), BrowserContract.View
         val railBinding = binding as? OasisBrowserRailViewDelegate ?: return
         addressRail.updateLayoutParams<androidx.constraintlayout.widget.ConstraintLayout.LayoutParams> {
             width = 0
-            height = ViewGroup.LayoutParams.MATCH_PARENT
+            height = 48.dp
             startToStart = -1
             startToEnd = R.id.rail_top_actions
             endToEnd = -1
