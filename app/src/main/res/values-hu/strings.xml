@@ -244,7 +244,6 @@
     <string name="custom_filters_invalid">Mentve: %1$d érvénytelen sor(ok) kihagyva</string>
     <string name="custom_filters_saved">Egyéni szűrők mentve</string>
     <string name="custom_filters_summary">Írjon vagy szerkesszen uBlock-kompatibilis hálózati és elemszabályokat</string>
-    <string name="debug_leak_canary">LeakCanary</string>
     <string name="debug_title">Hibakeresési beállítások</string>
     <string name="developer">Fejlesztő</string>
     <string name="developer_name">Alzimer Ahmed</string>

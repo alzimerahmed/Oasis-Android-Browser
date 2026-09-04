@@ -12,7 +12,6 @@ import com.alzimerahmed.oasisbrowser.device.BuildType
 import com.alzimerahmed.oasisbrowser.log.Logger
 import com.alzimerahmed.oasisbrowser.migration.Cleanup
 import com.alzimerahmed.oasisbrowser.utils.FileUtils
-import com.alzimerahmed.oasisbrowser.utils.LeakCanaryUtils
 import android.app.Application
 import android.os.Build
 import android.os.StrictMode
@@ -31,9 +30,6 @@ import kotlin.system.exitProcess
  * The browser application.
  */
 class BrowserApp : Application() {
-
-    @Inject
-    internal lateinit var leakCanaryUtils: LeakCanaryUtils
 
     @Inject
     internal lateinit var bookmarkModel: BookmarkRepository
@@ -120,10 +116,6 @@ class BrowserApp : Application() {
             .andThen(migrateLegacyDefaultBookmarks())
             .subscribeOn(databaseScheduler)
             .subscribe()
-
-        if (buildInfo.buildType == BuildType.DEBUG) {
-            leakCanaryUtils.setup()
-        }
 
         registerActivityLifecycleCallbacks(proxyAdapter)
     }

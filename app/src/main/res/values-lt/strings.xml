@@ -118,7 +118,6 @@
     <string name="custom_filters_saved">Tinkinti filtrai išsaugoti</string>
     <string name="custom_filters_summary">Rašykite arba redaguokite su uBlock suderinamas tinklo ir elementų taisykles</string>
     <string name="dark_theme">Tamsi tema</string>
-    <string name="debug_leak_canary">LeakCanary</string>
     <string name="debug_title">Derinimo nustatymai</string>
     <string name="developer">Kūrėjas</string>
     <string name="developer_name">Alzimer Ahmed</string>

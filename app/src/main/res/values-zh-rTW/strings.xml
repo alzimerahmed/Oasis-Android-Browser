@@ -190,7 +190,6 @@
         
     <!-- debug strings -->
     <string name="debug_title">偵錯設定</string>
-    <string name="debug_leak_canary">LeakCanary</string>
     <string name="app_restart">請重新啟動此應用程式以使變更生效</string>
     
     <!-- Dialogs -->

@@ -187,7 +187,6 @@
 
     <!-- Debug strings -->
     <string name="debug_title">Debug Einstellungen</string>
-    <string name="debug_leak_canary">LeakCanary</string>
     <string name="app_restart">Bitte schließen Sie die App um die Änderungen anzuwenden.</string>
 
 	<!-- Dialogs -->

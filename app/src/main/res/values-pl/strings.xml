@@ -25,7 +25,6 @@
 	<string name="dialog_open_background_tab">Otwórz w nowej karcie w tle</string>
 	<string name="dialog_open_new_tab">Otwórz w nowej karcie</string>
 	<string name="app_restart">Uruchom aplikację ponownie, aby uzyskać zmiany.</string>
-	<string name="debug_leak_canary">LeakCanary</string>
 	<string name="debug_title">Ustawienia debugowania</string>
 	<string name="message_open_download_fail">Ten plik już nie istnieje</string>
     <string name="action_delete_all_bookmarks">Usuń wszystkie zakładki</string>

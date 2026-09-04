@@ -249,7 +249,6 @@
     <string name="custom_filters_invalid">건너뛴 %1$d 유효하지 않은 줄로 저장됨</string>
     <string name="custom_filters_saved">맞춤 필터가 저장되었습니다.</string>
     <string name="custom_filters_summary">uBlock 호환 네트워크 및 요소 규칙 작성 또는 편집</string>
-    <string name="debug_leak_canary">누출카나리아</string>
     <string name="developer">개발자</string>
     <string name="developer_name">케네스-조-인포섹(Alzimer Ahmed)</string>
     <string name="dialog_adblock_disable_for_site">사이트에 대한 광고 차단 비활성화</string>

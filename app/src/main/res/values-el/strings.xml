@@ -191,7 +191,6 @@
     <string name="custom_filters_saved">Τα προσαρμοσμένα φίλτρα αποθηκεύτηκαν</string>
     <string name="custom_filters_summary">Γράψτε ή επεξεργαστείτε κανόνες δικτύου και στοιχείων συμβατούς με το uBlock</string>
     <string name="dark_theme">Σκοτεινό θέμα</string>
-    <string name="debug_leak_canary">LeakCanary</string>
     <string name="debug_title">Ρυθμίσεις εντοπισμού σφαλμάτων</string>
     <string name="developer">Προγραμματιστής</string>
     <string name="developer_name">Alzimer Ahmed</string>

@@ -121,7 +121,6 @@
     <string name="custom_filters_saved">מסננים מותאמים אישית נשמרו</string>
     <string name="custom_filters_summary">כתוב או ערוך כללי רשת ואלמנטים תואמי uBlock</string>
     <string name="dark_theme">נושא אפל</string>
-    <string name="debug_leak_canary">LeakCanary</string>
     <string name="debug_title">הגדרות ניפוי באגים</string>
     <string name="developer">מפתח</string>
     <string name="developer_name">Alzimer Ahmed</string>

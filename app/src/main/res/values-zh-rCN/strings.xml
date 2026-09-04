@@ -306,7 +306,6 @@
     <string name="custom_filters_invalid">保存时跳过了 %1$d 无效行</string>
     <string name="custom_filters_saved">已保存自定义过滤器</string>
     <string name="custom_filters_summary">编写或编辑与 uBlock 兼容的网络和元素规则</string>
-    <string name="debug_leak_canary">金丝雀泄密</string>
     <string name="developer">开发商</string>
     <string name="developer_name">肯尼思·乔·信息安全</string>
     <string name="dialog_bookmark">书签</string>

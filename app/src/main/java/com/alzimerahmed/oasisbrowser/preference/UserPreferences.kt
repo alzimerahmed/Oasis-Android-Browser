@@ -68,6 +68,9 @@ class UserPreferences @Inject constructor(
     /** Enable double-tap and swipe gestures on HTML5 video elements. */
     var videoGestureControlsEnabled by preferences.booleanPreference(VIDEO_GESTURE_CONTROLS_ENABLED, false)
 
+    /** Version code for which upgrade cleanup last ran. */
+    var lastCleanupVersionCode by preferences.longPreference(LAST_CLEANUP_VERSION_CODE, 0L)
+
     /** Show release notes once after the app version changes. */
     var releaseNotesEnabled by preferences.booleanPreference(RELEASE_NOTES_ENABLED, true)
 
@@ -784,6 +787,7 @@ private const val PER_SITE_ZOOM_ENABLED = "perSiteZoomEnabled"
 private const val FINGERPRINT_RANDOMIZATION_ENABLED = "fingerprintRandomizationEnabled"
 private const val VARIABLE_FONT_BUNDLE_ENABLED = "variableFontBundleEnabled"
 private const val VIDEO_GESTURE_CONTROLS_ENABLED = "videoGestureControlsEnabled"
+private const val LAST_CLEANUP_VERSION_CODE = "lastCleanupVersionCode"
 private const val SEARCH_SUGGESTIONS = "searchSuggestionsChoice"
 private const val HOSTS_SOURCE = "hostsSource"
 private const val HOSTS_LOCAL_FILE = "hostsLocalFile"

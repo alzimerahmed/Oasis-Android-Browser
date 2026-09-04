@@ -49,14 +49,6 @@ class DebugSettingsFragment : AbstractSettingsFragment() {
                 activity?.snackbar(R.string.debug_antares_coordinate_bridge_applies_to_new_tabs)
             },
         )
-        togglePreference(
-            preference = LEAK_CANARY,
-            isChecked = developerPreferences.useLeakCanary,
-            onCheckChange = { change ->
-                activity?.snackbar(R.string.app_restart)
-                developerPreferences.useLeakCanary = change
-            }
-        )
     }
 
     override fun onResume() {
@@ -77,6 +69,5 @@ class DebugSettingsFragment : AbstractSettingsFragment() {
         private const val EXPERIMENTAL_RAIL_LAYOUTS = "experimental_rail_layouts"
         private const val ANTARES_COORDINATE_BRIDGE = "antares_coordinate_bridge"
         private const val BROWSER_CORE = "browser_core"
-        private const val LEAK_CANARY = "leak_canary_enabled"
     }
 }

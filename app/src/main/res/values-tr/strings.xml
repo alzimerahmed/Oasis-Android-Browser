@@ -206,7 +206,6 @@
 
     <!-- debug strings -->					  
     <string name="debug_title">Hata ayıklama ayarları</string>
-    <string name="debug_leak_canary">LeakCanary</string>
     <string name="app_restart">Değişikliklerin etkili olması için lütfen uygulamayı yeniden başlatın.</string>
 
     <!-- Dialogs -->

@@ -177,8 +177,6 @@ dependencies {
     implementation("org.reactivestreams:reactive-streams:1.0.4")
     implementation("androidx.profileinstaller:profileinstaller:1.4.1")
 
-    debugImplementation("com.squareup.leakcanary:leakcanary-android:2.14")
-
     compileOnly("javax.annotation:jsr250-api:1.0")
 
     testImplementation("com.nhaarman:mockito-kotlin:1.6.0") {

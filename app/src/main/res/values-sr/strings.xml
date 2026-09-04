@@ -244,7 +244,6 @@
     <string name="custom_filters_invalid">Saved with %1$d invalid line(s) skipped</string>
     <string name="custom_filters_saved">Прилагођени филтери су сачувани</string>
     <string name="custom_filters_summary">Напишите или уредите правила мреже и елемената компатибилна са уБлоцк-ом</string>
-    <string name="debug_leak_canary">ЛеакЦанари</string>
     <string name="debug_title">Подешавања за отклањање грешака</string>
     <string name="developer">Девелопер</string>
     <string name="developer_name">Кеннетх-Цхо-ИнфоСец</string>

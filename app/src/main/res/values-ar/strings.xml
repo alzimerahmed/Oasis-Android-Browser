@@ -147,7 +147,6 @@
     <string name="custom_filters_saved">تم حفظ المرشحات المخصصة</string>
     <string name="custom_filters_summary">كتابة أو تحرير قواعد الشبكة والعناصر المتوافقة مع uBlock</string>
     <string name="dark_theme">موضوع مظلم</string>
-    <string name="debug_leak_canary">تسرب الكناري</string>
     <string name="debug_title">إعدادات التصحيح</string>
     <string name="developer">المطور</string>
     <string name="developer_name">كينيث تشو-InfoSec</string>

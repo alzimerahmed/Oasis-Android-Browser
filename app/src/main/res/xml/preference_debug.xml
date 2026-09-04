@@ -17,10 +17,5 @@
             android:key="antares_coordinate_bridge"
             android:summary="@string/debug_antares_coordinate_bridge_summary"
             android:title="@string/debug_antares_coordinate_bridge" />
-        <SwitchPreferenceCompat
-            android:defaultValue="false"
-            android:icon="@drawable/ic_settings_debug"
-            android:key="leak_canary_enabled"
-            android:title="@string/debug_leak_canary"/>
     </PreferenceCategory>
 </PreferenceScreen>

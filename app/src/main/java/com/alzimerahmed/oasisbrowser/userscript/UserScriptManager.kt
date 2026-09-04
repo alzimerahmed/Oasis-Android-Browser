@@ -12,22 +12,27 @@ import javax.inject.Singleton
 class UserScriptManager @Inject constructor(application: Application) {
     private val root = File(application.filesDir, "userscripts")
     private val scripts = linkedMapOf<String, UserScript>()
+    private var loaded = false
 
-    init {
-        root.mkdirs()
-        loadFromDisk()
+    @Synchronized
+    fun all(): List<UserScript> {
+        ensureLoaded()
+        return scripts.values.toList()
     }
 
     @Synchronized
-    fun all(): List<UserScript> = scripts.values.toList()
+    fun find(id: String): UserScript? {
+        ensureLoaded()
+        return scripts[id]
+    }
 
     @Synchronized
-    fun find(id: String): UserScript? = scripts[id]
-
-    @Synchronized
-    fun matching(url: String, runAt: UserScriptRunAt): List<UserScript> = scripts.values
-        .filter { it.enabled && it.metadata.isUnprivileged && it.metadata.runAt == runAt }
-        .filter { UserScriptUrlMatcher.matches(it.metadata, url) }
+    fun matching(url: String, runAt: UserScriptRunAt): List<UserScript> {
+        ensureLoaded()
+        return scripts.values
+            .filter { it.enabled && it.metadata.isUnprivileged && it.metadata.runAt == runAt }
+            .filter { UserScriptUrlMatcher.matches(it.metadata, url) }
+    }
 
     @Synchronized
     fun install(
@@ -35,6 +40,7 @@ class UserScriptManager @Inject constructor(application: Application) {
         dependencies: List<String> = emptyList(),
         enabled: Boolean = true
     ): UserScript {
+        ensureLoaded()
         validateSourceSize(source)
         dependencies.forEach(::validateSourceSize)
         val metadata = UserScriptMetadataParser.parse(source)
@@ -60,6 +66,7 @@ class UserScriptManager @Inject constructor(application: Application) {
 
     @Synchronized
     fun updateSource(id: String, source: String) {
+        ensureLoaded()
         validateSourceSize(source)
         val old = scripts[id] ?: throw IllegalArgumentException("Unknown userscript")
         val metadata = UserScriptMetadataParser.parse(source)
@@ -71,6 +78,7 @@ class UserScriptManager @Inject constructor(application: Application) {
 
     @Synchronized
     fun setEnabled(id: String, enabled: Boolean) {
+        ensureLoaded()
         val old = scripts[id] ?: return
         val updated = old.copy(enabled = enabled)
         write(updated)
@@ -79,8 +87,16 @@ class UserScriptManager @Inject constructor(application: Application) {
 
     @Synchronized
     fun delete(id: String) {
+        ensureLoaded()
         scripts.remove(id)
         File(root, id).deleteRecursively()
+    }
+
+    private fun ensureLoaded() {
+        if (loaded) return
+        loaded = true
+        root.mkdirs()
+        loadFromDisk()
     }
 
     private fun loadFromDisk() {
