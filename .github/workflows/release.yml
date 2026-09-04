@@ -30,7 +30,30 @@ jobs:
       - name: Run unit tests
         run: ./gradlew testOasisBrowserDebugUnitTest
 
+      - name: Restore signing keystore
+        id: keystore-cache
+        uses: actions/cache@v4
+        with:
+          path: release.keystore
+          key: oasis-release-keystore-v1
+
+      - name: Generate signing keystore
+        if: steps.keystore-cache.outputs.cache-hit != 'true'
+        run: |
+          keytool -genkeypair -v \
+            -keystore release.keystore \
+            -storetype PKCS12 \
+            -alias oasisbrowser \
+            -keyalg RSA -keysize 2048 -validity 10000 \
+            -storepass oasisbrowser -keypass oasisbrowser \
+            -dname "CN=Oasis Browser, OU=Oasis, O=Oasis Browser, L=Internet, ST=Internet, C=US"
+
       - name: Assemble release APK
+        env:
+          KEYSTORE: ${{ github.workspace }}/release.keystore
+          STORE_PASSWORD: oasisbrowser
+          ALIAS: oasisbrowser
+          KEY_PASSWORD: oasisbrowser
         run: ./gradlew assembleOasisBrowserRelease
 
       - name: Assemble debug APK
