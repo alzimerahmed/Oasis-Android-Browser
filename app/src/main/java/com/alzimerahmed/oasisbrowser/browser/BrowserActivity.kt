@@ -137,6 +137,7 @@ import androidx.core.net.toUri
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.ViewCompat
+import androidx.core.view.doOnLayout
 import androidx.core.view.isVisible
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.media3.common.util.UnstableApi
@@ -274,23 +275,26 @@ abstract class BrowserActivity : ThemableBrowserActivity(), BrowserContract.View
                 immersiveFullscreen)
 
         if (railPosition.isExperimental) {
+            val railAtTop = railPosition == OasisBrowserRailPosition.TOP
             binding.toolbarLayout.visibility = View.VISIBLE
-            applyHorizontalOasisBrowserRailPreferences(railWidth, superCompact)
+            // ui_layout already receives the system bar insets from DrawerLayout, so letting the
+            // rail apply them a second time as padding pushed its actions past the declared rail
+            // height and over the page content below it.
+            binding.toolbarLayout.fitsSystemWindows = false
+            val horizontalRailHeight = horizontalRailHeight(railWidth, superCompact)
+            applyHorizontalOasisBrowserRailPreferences(horizontalRailHeight, superCompact)
             applyQrAndTabsButtonPositions()
-            configureHorizontalOasisBrowserRailConstraints(railWidth)
-            binding.contentFrame.applyHorizontalRailMargin(railWidth, railPosition == OasisBrowserRailPosition.TOP)
-            binding.progressView.applyHorizontalRailMargin(railWidth, railPosition == OasisBrowserRailPosition.TOP)
-            binding.addressOverlay?.applyHorizontalAddressMargin(
-                railWidth,
-                railPosition == OasisBrowserRailPosition.TOP
-            )
-            binding.findBar.applyHorizontalFindBarMargin(
-                railWidth,
-                railPosition == OasisBrowserRailPosition.TOP
-            )
+            configureHorizontalOasisBrowserRailConstraints(horizontalRailHeight)
+            applyHorizontalRailOffsets(horizontalRailHeight, railAtTop)
+            // Offsets follow the rail's real measured height rather than the nominal preference so
+            // padding or inset changes cannot silently overlap the content again.
+            binding.toolbarLayout.doOnLayout { rail ->
+                applyHorizontalRailOffsets(maxOf(rail.height, horizontalRailHeight), railAtTop)
+            }
             return
         }
 
+        binding.toolbarLayout.fitsSystemWindows = true
         binding.actionHome.visibility = View.VISIBLE
         binding.actionAddBookmark.visibility = View.VISIBLE
         binding.toolbarLayout.visibility = if (hideRail) View.INVISIBLE else View.VISIBLE
@@ -422,21 +426,43 @@ abstract class BrowserActivity : ThemableBrowserActivity(), BrowserContract.View
         snackbar(if (enabled) R.string.fullscreen_enabled else R.string.fullscreen_disabled)
     }
 
+    /**
+     * The rail size preference describes a vertical rail's width. Reused as a horizontal rail's
+     * height it can be smaller than the rail's own actions, which then render outside the rail
+     * background and cover the page. Clamp it to the space the actions actually need.
+     */
+    private fun horizontalRailHeight(railHeight: Int, superCompact: Boolean): Int {
+        val verticalPadding = 2 * if (superCompact) 1.dp else 8.dp
+        return maxOf(railHeight, HORIZONTAL_RAIL_ACTION_SIZE_DP.dp + verticalPadding)
+    }
+
+    /** Keeps every surface below or above a horizontal rail aligned to the same rail height. */
+    private fun applyHorizontalRailOffsets(railHeight: Int, railAtTop: Boolean) {
+        binding.contentFrame.applyHorizontalRailMargin(railHeight, railAtTop)
+        binding.progressView.applyHorizontalRailMargin(railHeight, railAtTop)
+        binding.addressOverlay?.applyHorizontalAddressMargin(railHeight, railAtTop)
+        binding.findBar.applyHorizontalFindBarMargin(railHeight, railAtTop)
+    }
+
     private fun applyHorizontalOasisBrowserRailPreferences(railHeight: Int, superCompact: Boolean) {
         // Horizontal rails use one adaptive row. Every action keeps a 48dp touch target while
         // the address field expands into the space left between the action groups.
-        val buttonSize = 48.dp
+        val buttonSize = HORIZONTAL_RAIL_ACTION_SIZE_DP.dp
         // Keep the 48dp interactive surface, but use the smaller visual glyph size of the
         // overflow action so horizontal rails do not look crowded. Vertical rails retain their
         // existing icon sizing in the side-rail code path.
         val iconPadding = 12.dp
         val railBinding = binding as? OasisBrowserRailViewDelegate ?: return
         val railAtTop = activeOasisBrowserRailPosition() == OasisBrowserRailPosition.TOP
+        // Size the rail to its own actions with the requested height as a floor. A fixed height
+        // smaller than the row's content let the actions draw outside the rail background, which is
+        // what covered the page content underneath.
         binding.toolbarLayout.updateLayoutParams<FrameLayout.LayoutParams> {
             width = ViewGroup.LayoutParams.MATCH_PARENT
-            height = railHeight
+            height = ViewGroup.LayoutParams.WRAP_CONTENT
             gravity = if (railAtTop) Gravity.TOP else Gravity.BOTTOM
         }
+        binding.toolbarLayout.minimumHeight = railHeight
         binding.toolbarLayout.setBackgroundResource(
             if (railAtTop) {
                 R.drawable.oasisbrowser_rail_background_top
@@ -481,7 +507,7 @@ abstract class BrowserActivity : ThemableBrowserActivity(), BrowserContract.View
             gravity = Gravity.CENTER
             updateLayoutParams<androidx.constraintlayout.widget.ConstraintLayout.LayoutParams> {
                 width = ViewGroup.LayoutParams.WRAP_CONTENT
-                height = ViewGroup.LayoutParams.MATCH_PARENT
+                height = ViewGroup.LayoutParams.WRAP_CONTENT
                 startToStart = androidx.constraintlayout.widget.ConstraintLayout.LayoutParams.PARENT_ID
                 endToStart = R.id.address_rail
                 topToTop = androidx.constraintlayout.widget.ConstraintLayout.LayoutParams.PARENT_ID
@@ -510,7 +536,7 @@ abstract class BrowserActivity : ThemableBrowserActivity(), BrowserContract.View
             orientation = LinearLayout.HORIZONTAL
             updateLayoutParams<LinearLayout.LayoutParams> {
                 width = ViewGroup.LayoutParams.WRAP_CONTENT
-                height = ViewGroup.LayoutParams.MATCH_PARENT
+                height = ViewGroup.LayoutParams.WRAP_CONTENT
             }
         }
         listOfNotNull(
@@ -549,7 +575,7 @@ abstract class BrowserActivity : ThemableBrowserActivity(), BrowserContract.View
         val railBinding = binding as? OasisBrowserRailViewDelegate ?: return
         addressRail.updateLayoutParams<androidx.constraintlayout.widget.ConstraintLayout.LayoutParams> {
             width = 0
-            height = 48.dp
+            height = HORIZONTAL_RAIL_ACTION_SIZE_DP.dp
             startToStart = -1
             startToEnd = R.id.rail_top_actions
             endToEnd = -1
@@ -565,7 +591,7 @@ abstract class BrowserActivity : ThemableBrowserActivity(), BrowserContract.View
         }
         railBinding.railTopActions.updateLayoutParams<androidx.constraintlayout.widget.ConstraintLayout.LayoutParams> {
             width = ViewGroup.LayoutParams.WRAP_CONTENT
-            height = ViewGroup.LayoutParams.MATCH_PARENT
+            height = ViewGroup.LayoutParams.WRAP_CONTENT
             startToStart = parentId
             endToStart = R.id.address_rail
             startToEnd = -1
@@ -577,7 +603,7 @@ abstract class BrowserActivity : ThemableBrowserActivity(), BrowserContract.View
         }
         railNav.updateLayoutParams<androidx.constraintlayout.widget.ConstraintLayout.LayoutParams> {
             width = ViewGroup.LayoutParams.WRAP_CONTENT
-            height = ViewGroup.LayoutParams.MATCH_PARENT
+            height = ViewGroup.LayoutParams.WRAP_CONTENT
             startToStart = -1
             startToEnd = R.id.address_rail
             endToEnd = parentId
@@ -2838,6 +2864,7 @@ abstract class BrowserActivity : ThemableBrowserActivity(), BrowserContract.View
     }
 }
 
+private const val HORIZONTAL_RAIL_ACTION_SIZE_DP = 48
 private const val SUPER_COMPACT_RAIL_WIDTH_DP = 30
 private const val MIN_OasisBrowser_RAIL_WIDTH_DP = SUPER_COMPACT_RAIL_WIDTH_DP
 private const val MAX_OasisBrowser_RAIL_WIDTH_DP = 96

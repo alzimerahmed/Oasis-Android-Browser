@@ -10,7 +10,6 @@ import android.util.TypedValue
 import android.view.LayoutInflater
 import android.widget.FrameLayout
 import androidx.core.view.isVisible
-import androidx.core.view.updateLayoutParams
 import androidx.recyclerview.widget.GridLayoutManager
 import coil3.load
 import com.alzimerahmed.oasisbrowser.AppTheme
@@ -18,7 +17,6 @@ import com.alzimerahmed.oasisbrowser.R
 import com.alzimerahmed.oasisbrowser.browser.di.DiskScheduler
 import com.alzimerahmed.oasisbrowser.browser.di.MainScheduler
 import com.alzimerahmed.oasisbrowser.browser.image.ImageLoader
-import com.alzimerahmed.oasisbrowser.browser.ui.OasisBrowserRailPosition
 import com.alzimerahmed.oasisbrowser.databinding.ViewNativeHomepageBinding
 import com.alzimerahmed.oasisbrowser.preference.UserPreferences
 import io.reactivex.rxjava3.core.Scheduler
@@ -37,7 +35,6 @@ class NativeHomepageView @JvmOverloads constructor(
     private val binding = ViewNativeHomepageBinding.inflate(LayoutInflater.from(context), this, true)
     private val handler = Handler(Looper.getMainLooper())
     private var state: HomepageUiState? = null
-    private var railPosition: OasisBrowserRailPosition = OasisBrowserRailPosition.RIGHT
     private var refreshAction: (() -> Unit)? = null
     private var disposeAction: (() -> Unit)? = null
     private val clockUpdate = object : Runnable {
@@ -47,18 +44,12 @@ class NativeHomepageView @JvmOverloads constructor(
         }
     }
 
-    private val homepageDefaultTopGap = resources.getDimensionPixelSize(R.dimen.chrome_outer_margin)
-    private val homepageTopRailGap = resources.getDimensionPixelSize(R.dimen.chrome_outer_margin) * 5
-
     fun render(
         state: HomepageUiState,
         adapter: HomepageShortcutAdapter,
         isLightTheme: Boolean,
     ) {
         this.state = state
-        binding.homepageShortcuts.updateLayoutParams<androidx.constraintlayout.widget.ConstraintLayout.LayoutParams> {
-            topMargin = if (railPosition == OasisBrowserRailPosition.TOP) homepageTopRailGap else homepageDefaultTopGap
-        }
         binding.homepageShortcuts.apply {
             layoutManager = GridLayoutManager(context, state.bookmarkColumns)
             this.adapter = adapter
@@ -114,11 +105,6 @@ class NativeHomepageView @JvmOverloads constructor(
         disposeAction = action
     }
 
-    fun setRailPosition(position: OasisBrowserRailPosition) {
-        railPosition = position
-        requestLayout()
-    }
-
     fun refresh() = refreshAction?.invoke()
 
     fun dispose() {
@@ -160,7 +146,6 @@ class NativeHomepageView @JvmOverloads constructor(
     ) {
         fun create(context: Context, onOpen: (String) -> Unit): NativeHomepageView {
             val view = NativeHomepageView(context)
-            view.setRailPosition(userPreferences.oasisbrowserRailPosition)
             val disposables = CompositeDisposable()
             val adapter = HomepageShortcutAdapter(imageLoader, onOpen)
             val refresh = {
