@@ -280,6 +280,6 @@ class WebViewScrollCoordinator @Inject constructor(
 
     companion object {
         private val SCROLL_UP_THRESHOLD = Utils.dpToPx(10f)
-        private const val FIXED_CHROME_TAG = "OasisBrowser_fixed_chrome"
+        private const val FIXED_CHROME_TAG = "oasisbrowser_fixed_chrome"
     }
 }
