@@ -35,7 +35,7 @@ android {
     defaultConfig {
         minSdk = 26
         targetSdk = 36
-        versionName = "7.0.7"
+        versionName = "7.1.0"
         vectorDrawables.useSupportLibrary = true
     }
 
