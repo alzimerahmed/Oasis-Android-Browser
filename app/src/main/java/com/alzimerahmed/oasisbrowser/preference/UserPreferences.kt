@@ -6,7 +6,6 @@ import com.alzimerahmed.oasisbrowser.browser.proxy.ProxyChoice
 import com.alzimerahmed.oasisbrowser.browser.search.SearchBoxDisplayChoice
 import com.alzimerahmed.oasisbrowser.browser.search.SearchBoxModel
 import com.alzimerahmed.oasisbrowser.browser.ui.TabConfiguration
-import com.alzimerahmed.oasisbrowser.browser.ui.OasisBrowserRailPosition
 import com.alzimerahmed.oasisbrowser.audio.AudioPreset
 import com.alzimerahmed.oasisbrowser.browser.view.RenderingMode
 import com.alzimerahmed.oasisbrowser.constant.DEFAULT_ENCODING
@@ -402,17 +401,6 @@ class UserPreferences @Inject constructor(
      */
     var oasisbrowserRailSize by preferences.intPreference(OasisBrowser_RAIL_SIZE, 72)
 
-    /**
-     * True if the OasisBrowser rail should be pinned to the left edge, false if pinned right.
-     */
-    var oasisbrowserRailOnLeft by preferences.booleanPreference(OasisBrowser_RAIL_ON_LEFT, false)
-
-    /** Placement of the OasisBrowser rail; horizontal placements are experimental. */
-    var oasisbrowserRailPosition by preferences.enumPreference(
-        OasisBrowser_RAIL_POSITION,
-        OasisBrowserRailPosition.TOP
-    )
-
     /** True when the QR scanner and Tabs controls should exchange their rail positions. */
     var swapQrAndTabsButtons by preferences.booleanPreference(SWAP_QR_AND_TABS_BUTTONS, false)
 
@@ -701,8 +689,6 @@ private const val CLEAR_WEB_STORAGE_EXIT = "clearWebStorageExit"
 private const val SHOW_TABS_IN_DRAWER = "showTabsInDrawer"
 private const val TAB_CONFIGURATION = "tabConfiguration"
 private const val OasisBrowser_RAIL_SIZE = "oasisbrowserRailSize"
-private const val OasisBrowser_RAIL_ON_LEFT = "oasisbrowserRailOnLeft"
-private const val OasisBrowser_RAIL_POSITION = "oasisbrowserRailPosition"
 private const val SWAP_QR_AND_TABS_BUTTONS = "swapQrAndTabsButtons"
 private const val BOOKMARK_DECOY_MODE_ENABLED = "bookmarkDecoyModeEnabled"
 private const val BOOKMARK_FAVICONS_ENABLED = "bookmarkFaviconsEnabled"

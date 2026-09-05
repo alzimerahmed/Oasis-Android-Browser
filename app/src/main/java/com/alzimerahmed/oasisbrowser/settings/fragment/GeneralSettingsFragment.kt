@@ -3,7 +3,6 @@ package com.alzimerahmed.oasisbrowser.settings.fragment
 import com.alzimerahmed.oasisbrowser.R
 import com.alzimerahmed.oasisbrowser.browser.di.injector
 import com.alzimerahmed.oasisbrowser.browser.proxy.ProxyChoice
-import com.alzimerahmed.oasisbrowser.browser.ui.OasisBrowserRailPosition
 import com.alzimerahmed.oasisbrowser.preference.DeveloperPreferences
 import com.alzimerahmed.oasisbrowser.constant.SCHEME_BLANK
 import com.alzimerahmed.oasisbrowser.constant.SCHEME_BOOKMARKS
@@ -104,12 +103,6 @@ class GeneralSettingsFragment : AbstractSettingsFragment() {
         displayAsPreference.title = getString(
             R.string.display_as_current,
             choiceToUserAgent(userPreferences.userAgentChoice)
-        )
-
-        clickableDynamicPreference(
-            preference = SETTINGS_RAIL_POSITION,
-            summary = currentRailPosition().toRailPositionDisplayString(),
-            onClick = ::showRailPositionPicker
         )
 
         togglePreference(
@@ -692,60 +685,6 @@ class GeneralSettingsFragment : AbstractSettingsFragment() {
         }
     }
 
-    private fun showRailPositionPicker(summaryUpdater: SummaryUpdater) {
-        val values = buildList {
-            add(OasisBrowserRailPosition.RIGHT to getString(R.string.settings_rail_position_right))
-            add(OasisBrowserRailPosition.LEFT to getString(R.string.settings_rail_position_left))
-            add(OasisBrowserRailPosition.TOP to getString(R.string.settings_rail_position_top))
-            add(OasisBrowserRailPosition.BOTTOM to getString(R.string.settings_rail_position_bottom))
-        }
-        lateinit var positionDialog: AlertDialog
-        positionDialog = MaterialAlertDialogBuilder(requireActivity()).apply {
-            setTitle(R.string.settings_rail_position)
-            setSingleChoiceItems(
-                values.map { it.second }.toTypedArray(),
-                values.indexOfFirst { it.first == currentRailPosition() }
-            ) { _, which ->
-                val selected = values[which].first
-                saveRailPosition(selected, summaryUpdater)
-            }
-            setPositiveButton(R.string.action_ok, null)
-        }.create()
-        positionDialog.show()
-    }
-
-    private fun showExperimentalRailWarning(onContinue: () -> Unit) {
-        MaterialAlertDialogBuilder(requireActivity())
-            .setTitle(R.string.settings_rail_experimental_title)
-            .setMessage(R.string.settings_rail_experimental_message)
-            .setNegativeButton(R.string.action_cancel, null)
-            .setPositiveButton(R.string.settings_rail_experimental_continue) { _, _ -> onContinue() }
-            .resizeAndShow()
-    }
-
-    private fun saveRailPosition(position: OasisBrowserRailPosition, summaryUpdater: SummaryUpdater) {
-        userPreferences.oasisbrowserRailPosition = position
-        if (position == OasisBrowserRailPosition.LEFT || position == OasisBrowserRailPosition.RIGHT) {
-            userPreferences.oasisbrowserRailOnLeft = position == OasisBrowserRailPosition.LEFT
-        }
-        summaryUpdater.updateSummary(position.toRailPositionDisplayString())
-        if (position == OasisBrowserRailPosition.TOP || position == OasisBrowserRailPosition.BOTTOM) {
-            requireActivity().finish()
-        }
-    }
-
-    private fun currentRailPosition(): OasisBrowserRailPosition =
-        userPreferences.oasisbrowserRailPosition
-
-    private fun OasisBrowserRailPosition.toRailPositionDisplayString(): String = getString(
-        when (this) {
-            OasisBrowserRailPosition.LEFT -> R.string.settings_rail_position_left
-            OasisBrowserRailPosition.TOP -> R.string.settings_rail_position_top
-            OasisBrowserRailPosition.BOTTOM -> R.string.settings_rail_position_bottom
-            OasisBrowserRailPosition.RIGHT -> R.string.settings_rail_position_right
-        }
-    )
-
     companion object {
         private const val SETTINGS_LANGUAGE = "app_language"
         private const val SETTINGS_CUSTOM_LANGUAGE = "custom_language_xml"
@@ -755,7 +694,6 @@ class GeneralSettingsFragment : AbstractSettingsFragment() {
         private const val SETTINGS_JAVASCRIPT = "cb_javascript"
         private const val SETTINGS_COLOR_MODE = "cb_colormode"
         private const val SETTINGS_USER_AGENT = "agent"
-        private const val SETTINGS_RAIL_POSITION = "rail_position"
         private const val SETTINGS_CHROMPATIBILITY = "chrompatibility_mode"
         private const val SETTINGS_DOWNLOAD = "download"
         private const val SETTINGS_SAVE_IMAGES_AS_JPEG = "save_images_as_jpeg"

@@ -2,7 +2,6 @@ package com.alzimerahmed.oasisbrowser
 
 import com.alzimerahmed.oasisbrowser.browser.di.injector
 import com.alzimerahmed.oasisbrowser.browser.ui.TabConfiguration
-import com.alzimerahmed.oasisbrowser.browser.ui.OasisBrowserRailPosition
 import com.alzimerahmed.oasisbrowser.preference.DeveloperPreferences
 import com.alzimerahmed.oasisbrowser.preference.UserPreferences
 import com.alzimerahmed.oasisbrowser.i18n.TranslationOverrides
@@ -38,8 +37,6 @@ abstract class ThemableBrowserActivity : AppCompatActivity() {
     private var themeId: AppTheme = AppTheme.LIGHT
     private var tabConfiguration: TabConfiguration = TabConfiguration.DRAWER_BOTTOM
     private var oasisbrowserRailSize: Int = 72
-    private var oasisbrowserRailOnLeft: Boolean = false
-    private var oasisbrowserRailPosition: OasisBrowserRailPosition = OasisBrowserRailPosition.RIGHT
     private var shouldRunOnResumeActions = false
     private var appliedSystemAccent: Int? = null
 
@@ -55,8 +52,6 @@ abstract class ThemableBrowserActivity : AppCompatActivity() {
         themeId = userPreferences.useTheme
         tabConfiguration = userPreferences.tabConfiguration
         oasisbrowserRailSize = userPreferences.oasisbrowserRailSize
-        oasisbrowserRailOnLeft = userPreferences.oasisbrowserRailOnLeft
-        oasisbrowserRailPosition = activeOasisBrowserRailPosition()
         val effectiveTheme = userPreferences.useTheme.effective(this)
 
         // set the theme
@@ -136,20 +131,14 @@ abstract class ThemableBrowserActivity : AppCompatActivity() {
         CustomFontManager.applyToViewTree(window.decorView, userPreferences.customFontPath)
         shouldRunOnResumeActions = true
         val nextTabConfiguration = userPreferences.tabConfiguration
-        val nextRailPosition = activeOasisBrowserRailPosition()
         if (
             themeId != userPreferences.useTheme ||
             tabConfiguration != nextTabConfiguration ||
-            oasisbrowserRailSize != userPreferences.oasisbrowserRailSize ||
-            oasisbrowserRailOnLeft != userPreferences.oasisbrowserRailOnLeft ||
-            oasisbrowserRailPosition != nextRailPosition
+            oasisbrowserRailSize != userPreferences.oasisbrowserRailSize
         ) {
             restart()
         }
     }
-
-    protected fun activeOasisBrowserRailPosition(): OasisBrowserRailPosition =
-        userPreferences.oasisbrowserRailPosition
 
     protected fun restart() {
         finish()

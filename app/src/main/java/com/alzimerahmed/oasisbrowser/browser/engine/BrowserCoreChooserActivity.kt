@@ -34,7 +34,6 @@ import com.alzimerahmed.oasisbrowser.AppTheme
 import com.alzimerahmed.oasisbrowser.DefaultBrowserActivity
 import com.alzimerahmed.oasisbrowser.R
 import com.alzimerahmed.oasisbrowser.ThemeApplication
-import com.alzimerahmed.oasisbrowser.browser.ui.OasisBrowserRailPosition
 import com.alzimerahmed.oasisbrowser.browser.DonationPromptPreferences
 import com.alzimerahmed.oasisbrowser.device.ScreenSize
 import com.alzimerahmed.oasisbrowser.preference.UserPreferences
@@ -107,7 +106,6 @@ class BrowserCoreChooserActivity : AppCompatActivity() {
     private fun showCurrentStep() {
         when (currentStep) {
             SetupStep.APPEARANCE -> showAppearanceStep()
-            SetupStep.RAIL -> showRailStep()
             SetupStep.CORE -> showCoreStep()
             SetupStep.SEARCH -> showSearchStep()
         }
@@ -157,7 +155,7 @@ class BrowserCoreChooserActivity : AppCompatActivity() {
             userPreferences.accentPalette = selectedAccent.ordinal
             userPreferences.matchSystemAccent =
                 selectedTheme == AppTheme.SYSTEM || systemAccent.isChecked
-            currentStep = SetupStep.RAIL
+            currentStep = SetupStep.CORE
             recreate()
         }
     }
@@ -201,37 +199,6 @@ class BrowserCoreChooserActivity : AppCompatActivity() {
             grid.addView(cell)
         }
         systemAccent.setOnCheckedChangeListener { _, _ -> populateAccentGrid(grid, systemAccent) }
-    }
-
-    private fun showRailStep() {
-        currentStep = SetupStep.RAIL
-        setContentView(R.layout.activity_onboarding_rail_position)
-        bindBackNavigation()
-        val railChoices = findViewById<RadioGroup>(R.id.onboarding_rail_choices)
-        railChoices.check(
-            when (userPreferences.oasisbrowserRailPosition) {
-                OasisBrowserRailPosition.LEFT -> R.id.onboarding_rail_left
-                OasisBrowserRailPosition.RIGHT -> R.id.onboarding_rail_right
-                OasisBrowserRailPosition.TOP -> R.id.onboarding_rail_top
-                OasisBrowserRailPosition.BOTTOM -> R.id.onboarding_rail_bottom
-            }
-        )
-        findViewById<MaterialButton>(R.id.onboarding_rail_continue).setOnClickListener {
-            val position = when (railChoices.checkedRadioButtonId) {
-                R.id.onboarding_rail_right -> OasisBrowserRailPosition.RIGHT
-                R.id.onboarding_rail_top -> OasisBrowserRailPosition.TOP
-                R.id.onboarding_rail_bottom -> OasisBrowserRailPosition.BOTTOM
-                else -> OasisBrowserRailPosition.LEFT
-            }
-            userPreferences.oasisbrowserRailPosition = position
-            userPreferences.oasisbrowserRailOnLeft = position != OasisBrowserRailPosition.RIGHT
-            getSharedPreferences(DEVELOPER_PREFERENCES, MODE_PRIVATE)
-                .edit()
-                .putBoolean(EXPERIMENTAL_RAIL_LAYOUTS, position.isExperimental)
-                .apply()
-            currentStep = SetupStep.CORE
-            showCoreStep()
-        }
     }
 
     private fun showCoreStep() {
@@ -324,12 +291,7 @@ class BrowserCoreChooserActivity : AppCompatActivity() {
         userPreferences.useTheme = AppTheme.LIGHT
         userPreferences.accentPalette = AccentPalette.TEAL.ordinal
         userPreferences.matchSystemAccent = false
-        userPreferences.oasisbrowserRailPosition = OasisBrowserRailPosition.RIGHT
-        userPreferences.oasisbrowserRailOnLeft = false
-        getSharedPreferences(DEVELOPER_PREFERENCES, MODE_PRIVATE)
-            .edit()
-            .putBoolean(EXPERIMENTAL_RAIL_LAYOUTS, false)
-            .apply()
+        userPreferences.oasisbrowserRailSize = 72
         enforceDuckDuckGoForAntares()
         getSharedPreferences(DonationPromptPreferences.FILE_NAME, MODE_PRIVATE)
             .edit()
@@ -435,9 +397,8 @@ class BrowserCoreChooserActivity : AppCompatActivity() {
     private fun navigateBack() {
         when (currentStep) {
             SetupStep.APPEARANCE -> finish()
-            SetupStep.RAIL -> showAppearanceStep()
             SetupStep.CORE -> {
-                if (launchBrowserAfterChoice) showRailStep() else finish()
+                if (launchBrowserAfterChoice) showAppearanceStep() else finish()
             }
             SetupStep.SEARCH -> showCoreStep()
         }
@@ -520,7 +481,6 @@ class BrowserCoreChooserActivity : AppCompatActivity() {
 
     private enum class SetupStep {
         APPEARANCE,
-        RAIL,
         CORE,
         SEARCH
     }
@@ -529,7 +489,6 @@ class BrowserCoreChooserActivity : AppCompatActivity() {
         const val EXTRA_MANAGE_ONLY = "manage_only"
         private const val USER_PREFERENCES = "settings"
         private const val DEVELOPER_PREFERENCES = "developer_settings"
-        private const val EXPERIMENTAL_RAIL_LAYOUTS = "experimentalRailLayouts"
         private const val STATE_STEP = "setup_step"
         private const val STATE_CORE = "setup_core"
     }
